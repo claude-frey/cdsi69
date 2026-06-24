@@ -1,0 +1,231 @@
+     <!DOCTYPE html>
+     <html>
+<head>
+	 <meta charset="utf-8">
+     <meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+    <title>CDSI69</title>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+    <link rel="stylesheet"
+          href="css/style.css">
+</head>
+
+<body>
+   
+<h3>CDSI69 - Fiche de relevé de collecte</h3>
+<table>
+<tr>
+<td>
+
+<label>Nom itinéraire :</label><br>
+<input
+    type="text"
+    id="nomItineraire"
+    style="width:100%;"
+><br><br>
+</td>
+</tr>
+<tr>
+<td>
+<label>Date collecte :</label><br>
+<input type="date" id="dateCollecte"><br><br>
+</td>
+</tr>
+<tr>
+<td>
+<label>Commune(s) de départ :</label><br>
+<input
+    type="text"
+    id="communeDepart"
+    style="width:100%;"
+><br><br>
+</td>
+</tr>
+<tr>
+<td>
+<label>Lieu de départ :</label><br>
+<input
+    type="text"
+    id="lieuDepart"
+    style="width:100%;"
+><br><br>
+</td>
+</tr>
+<tr>
+<td>
+<label>Collecteurs :</label><br>
+<input
+    type="text"
+    id="collecteurs"
+    style="width:100%;"
+><br><br>
+</td>
+</tr>
+<tr>
+<td>
+<label>Accès :</label><br>
+<input
+    type="text"
+    id="acces"
+    style="width:100%;"
+><br><br>
+</td>
+</tr>
+<tr>
+<td>
+<label>Distance (km) :</label><br>
+<input
+    type="text"
+    id="distance"
+    readonly
+    style="width:100px;"
+><br><br>
+</tr>
+<tr>
+<td>
+<label>Temps de marche :</label><br>
+<input
+    type="text"
+    id="tempsMarche"
+    readonly
+    style="width:100px;"
+><br><br>
+</td>
+</tr>
+</table>
+
+
+
+
+<input type="file" id="gpxFile" accept=".gpx">
+<div id="nomGPXAffiche"></div>
+<div id="carte"></div>
+<div id="ficheWP">
+
+<h2>Waypoint</h2>
+
+<p>N° WP : <span id="numeroWP">-</span></p>
+
+<label>Balisage :</label>
+<select id="balisage">
+    <option value=""></option>
+    <option value="J">J</option>
+    <option value="GR">GR</option>
+    <option value="GRP">GRP</option>
+</select>
+
+<br><br>
+
+<label>Agglo :</label>
+<select id="agglo">
+    <option value=""></option>
+    <option value="E">E</option>
+    <option value="S">S</option>
+</select>
+
+<br><br>
+
+<label>Cheminement :</label>
+<select id="cheminement">
+    <option value=""></option>
+    <option value="R">R</option>
+    <option value="NR">NR</option>
+</select>
+
+<br><br>
+
+<label>Signalétique :</label>
+<select id="signaletique">
+    <option value=""></option>
+    <option value="DIR">DIR</option>
+    <option value="FLE">FLE</option>
+    <option value="DEP">DEP</option>
+    <option value="INFO">INFO</option>
+    <option value="SECU">SECU</option>
+</select>
+
+<br><br>
+
+<label>PK :</label>
+<input type="text" id="pk">
+
+<br><br>
+
+<label>Entre pas :</label>
+<input type="text" id="entrePas">
+
+<br><br>
+
+<label>Sécurité :</label><br>
+<textarea id="securite" rows="3" cols="40"></textarea>
+
+<br><br>
+
+<label>Nuisances :</label><br>
+<textarea id="nuisances" rows="3" cols="40"></textarea>
+
+<br><br>
+
+<label>POI / POV :</label><br>
+<textarea id="poiPov" rows="3" cols="40"></textarea>
+
+<br><br>
+
+<label>Pas à pas :</label><br>
+<textarea id="pasAPas" rows="4" cols="40"></textarea>
+
+<br><br>
+
+<button id="btnEnregistrer">
+Enregistrer
+</button>
+
+<button id="btnSupprimer">
+Supprimer WP
+</button>
+
+<button id="btnExporter">
+Exporter CSV
+</button>
+<button id="btnExporterGPX">
+Exporter GPX
+</button>
+<button id="btnExporterTrace">
+Exporter trace réelle
+</button>
+
+<button id="btnSauvegarder">
+Sauvegarder relevé
+</button>
+
+<button id="btnOuvrir">
+Ouvrir relevé
+</button>
+<button id="btnGPS">
+GPS OFF
+</button>
+<span id="precisionGPS"></span>
+<button id="btnWPGPS">
+WP GPS
+</button>
+<input
+    type="file"
+    id="fichierReleve"
+    accept=".json"
+    style="display:none;"
+>
+
+</div>
+<div id="ficheWP">
+</div>
+
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-omnivore/0.3.4/leaflet-omnivore.min.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
