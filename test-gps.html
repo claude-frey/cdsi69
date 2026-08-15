@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Test GPS</title>
+<style>
+
+body{
+    font-family:Arial;
+    margin:30px;
+    font-size:22px;
+}
+
+button{
+    font-size:22px;
+    padding:10px 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Test GPS</h2>
+
+<button onclick="testerGPS()">
+Tester le GPS
+</button>
+
+<p id="resultat">
+En attente...
+</p>
+
+<script>
+
+function testerGPS(){
+
+    if(!navigator.geolocation){
+
+        document.getElementById("resultat").innerHTML =
+            "Le GPS n'est pas disponible.";
+
+        return;
+
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position){
+
+            document.getElementById("resultat").innerHTML =
+                "<b>Latitude :</b> "
+                + position.coords.latitude
+                + "<br><br><b>Longitude :</b> "
+                + position.coords.longitude
+                + "<br><br><b>Précision :</b> "
+                + Math.round(position.coords.accuracy)
+                + " m";
+
+        },
+
+        function(erreur){
+
+            document.getElementById("resultat").innerHTML =
+                "<b>Erreur :</b><br>"
+                + erreur.code
+                + "<br>"
+                + erreur.message;
+
+        },
+
+        {
+            enableHighAccuracy:true,
+            timeout:10000,
+            maximumAge:0
+        }
+
+    );
+
+}
+
+</script>
+
+</body>
+</html>

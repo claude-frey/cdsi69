@@ -1,0 +1,37 @@
+CDSI69
+Version : V2.11 Stable
+
+Date : 11/07/2026
+
+État :
+✓ GPS
+✓ GPX
+✓ Waypoints
+✓ PK
+✓ Popup
+✓ Export
+✓ Vite opérationnel
+
+Base officielle de développement.
+
+CDSI69
+Version : V2.11 STABLE COMPLETE
+
+Date : 11/07/2026
+
+État :
+✓ Node.js
+✓ npm
+✓ Vite
+✓ PC
+✓ Téléphone
+✓ GPS
+✓ GPX
+✓ Waypoints
+✓ PK
+✓ Popup
+✓ Export
+
+Version de référence.
+Ne jamais modifier directement.
+Toujours travailler sur une copie.

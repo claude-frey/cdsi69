@@ -1,231 +1,874 @@
-     <!DOCTYPE html>
-     <html>
+<!--
+    CDSI69
+    Version : 2.11
+    Fichier : package.json
+
+    Auteurs :
+        Claude Frey
+        OpenAI ChatGPT
+
+    Rôle :
+        Interface principale de l'application.
+
+    Architecture V2.11
+
+        index.html
+        manifest.json
+        package.json
+        package-lock.json
+        service-worker.js
+        test-gps.html
+        Version.txt
+        vite.config.js
+            |
+            |__js
+                +__app.js
+                +__carte.js
+                +__gps.js
+                +__gpx.js
+                +__waypoints.js
+            |__css
+                +__style.js
+            |__Documents
+                +__CDSI69_Carnet_d_architecture_v1
+            |__icones
+                +__icon-192.png
+                +__icin-512.png
+            |__images
+            |__node_modules
+-->
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-	 <meta charset="utf-8">
-     <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-    <title>CDSI69</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CDSI69 V2.02</title>
+<link rel="stylesheet" href="css/style.css?v=2">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="css/leaflet.css?v=2">
 
-    <link rel="stylesheet"
-          href="https://unpkg.com/leaflet/dist/leaflet.css">
-
-    <link rel="stylesheet"
-          href="css/style.css">
 </head>
-
 <body>
+
+<div id="cdsi_preparation">
+
+    <div id="boutonsAccueil">
+
+    <button
+        type="button"
+        id="btnAide"
+        class="btnAide">
+        ❓ Aide
+    </button>
+
+    <button
+        type="button"
+        id="btnFondCarte"
+        class="btnAide">
+        🗺️ Plan IGN
+    </button>
+
+</div>
+
+    <header>
+
+    <h1 id="titreAccueil">
+    🚶 CDSI69 - Collecte
+    </h1>
+
+    <p id="questionAccueil">
+    Que souhaitez-vous faire ?
+    </p>
+
+    </header>
+
+
+
+
+    <label class="mode">
+    <input type="radio" id="modeGPX" name="modeCollecte">
+    <strong>Suivre un circuit existant</strong><br>
+    <small>(en suivant une trace GPX)</small>
+    </label>
+    <label class="mode">
+    <input type="radio" id="modeSansGPX" name="modeCollecte">
+
+    <strong>Créer une nouvelle trace</strong><br>
+    <small>(sans trace GPX)</small>
+    </label>
+
+
+
+
+
+    <button id="btnOuvrirCollecte"
+            onclick="ouvrirCollecte()">
+        <strong>Reprendre une collecte</strong>
+    </button>
+
+    <input
+        type="file"
+        id="fichierCollecte"
+        accept=".cdsi69"
+        style="display:none"
+        onchange="chargerCollecte(event)">
+
+
+    <div id="zoneReprise" class="cache">
+
+        <button id="btnOuvrirCollecte">
+            📂 Choisir une collecte
+        </button>
+
+        <p id="nomCollecteReprise">
+            Aucune collecte sélectionnée
+        </p>
+
+    </div>
+    <div id="zoneGPX" class="cache">
+    <button id="btnChoisirGPX">📂 Choisir un fichier GPX</button>
+    <p id="nomGPX">Aucun circuit sélectionné</p>
+    </div>
+
+
+    <div id="zoneTrace" class="cache">
+
+        <div class="titreChampDictee">
+
+            <label for="nomTrace">
+                <strong>Nom de la nouvelle trace</strong>
+            </label>
+
+            <button id="btnDicteeNomTrace" type="button">
+                🎤 Dicter
+            </button>
+
+        </div>
+
+        <input
+            id="nomTrace"
+            type="text"
+            placeholder="🔴 Nom de la trace manquant">
+
+    </div>
+
+
+
+
+    <section id="etatPreparation">
+
+        <p id="etatMode">🔴 Circuit non choisi</p>
+    <p id="etatCircuit">🔴 Nom de la trace non défini</p>
+    <p id="etatGPS">🔴 Attente d'un signal GPS</p>
+    </section>
+
+
+    <button id="btnCommencer" disabled>▶ Commencer</button>
+
    
-<h3>CDSI69 - Fiche de relevé de collecte</h3>
-<table>
-<tr>
-<td>
 
-<label>Nom itinéraire :</label><br>
-<input
-    type="text"
-    id="nomItineraire"
-    style="width:100%;"
-><br><br>
-</td>
-</tr>
-<tr>
-<td>
-<label>Date collecte :</label><br>
-<input type="date" id="dateCollecte"><br><br>
-</td>
-</tr>
-<tr>
-<td>
-<label>Commune(s) de départ :</label><br>
-<input
-    type="text"
-    id="communeDepart"
-    style="width:100%;"
-><br><br>
-</td>
-</tr>
-<tr>
-<td>
-<label>Lieu de départ :</label><br>
-<input
-    type="text"
-    id="lieuDepart"
-    style="width:100%;"
-><br><br>
-</td>
-</tr>
-<tr>
-<td>
-<label>Collecteurs :</label><br>
-<input
-    type="text"
-    id="collecteurs"
-    style="width:100%;"
-><br><br>
-</td>
-</tr>
-<tr>
-<td>
-<label>Accès :</label><br>
-<input
-    type="text"
-    id="acces"
-    style="width:100%;"
-><br><br>
-</td>
-</tr>
-<tr>
-<td>
-<label>Distance (km) :</label><br>
-<input
-    type="text"
-    id="distance"
-    readonly
-    style="width:100px;"
-><br><br>
-</tr>
-<tr>
-<td>
-<label>Temps de marche :</label><br>
-<input
-    type="text"
-    id="tempsMarche"
-    readonly
-    style="width:100px;"
-><br><br>
-</td>
-</tr>
-</table>
+</div>
+
+<div id="cdsi_collecte" style="display:none">
+
+<div id="tableauDeBord">
+
+    <div id="tdbLigne1">
+
+        <button id="btnRetourCollecte">⬅</button>
+
+        <span id="tdbCircuit">
+            -
+        </span>
+
+    </div>
+
+    <div id="tdbInfos">
+
+    <div class="ligneInfos">
+
+        <span>📍 <span id="nbWaypoints">0</span></span>
+
+        <span>🚶<span id="tdbPK">0 m</span></span>
+
+        <span id="blocEcart">
+         ↔️ <span id="tdbEcart">-- m</span>
+        </span>
+
+    </div>
+
+    <div class="ligneInfos">
+
+        <span id="etatGPSCollecte">🟢 GPS</span>
+
+        <span id="tdbAltitude">⛰️ ---</span>
+
+        <span id="tdbBatterie">🔋 --</span>
+
+    </div>
+</div>
 
 
+<div id="carte"
+     style="height:450px;border:1px solid #999;margin:10px 0">
+</div>
+
+<div id="barreBoutons">
+
+    <button id="btnWaypoint">📍 Nouveau waypoint</button>
+
+  
+    <button id="btnTerminerCollecte">
+        🏁 Terminer la collecte
+    </button>
+
+</div>
+
+<hr>
 
 
-<input type="file" id="gpxFile" accept=".gpx">
-<div id="nomGPXAffiche"></div>
-<div id="carte"></div>
+<div id="overlay"></div>
+
+
 <div id="ficheWP">
 
-<h2>Waypoint</h2>
+<div id="enteteWP">
 
-<p>N° WP : <span id="numeroWP">-</span></p>
+    <span id="titreWaypoint">
+        📍 WP <span id="numeroWP">-</span>
+    </span>
+
+
+    <span id="infoPK">
+        PK : <span id="pk"></span> m
+    </span>
+
+    <span id="infoEntre">
+        Entre : <span id="entrePas"></span> m
+    </span>
+
+    <span id="infoGPX">
+        GPX : <span id="ecartGPX"></span> m
+    </span>
+
+</div>
+
+
+
 
 <label>Balisage :</label>
-<select id="balisage">
-    <option value=""></option>
-    <option value="J">J</option>
-    <option value="GR">GR</option>
-    <option value="GRP">GRP</option>
-</select>
+
+<input type="hidden" id="balisage">
+
+<div id="ligneBalisage">
+
+    <button type="button" id="btnGR"
+            onclick="choisirBalisage('GR')">
+        GR
+    </button>
+
+    <button type="button" id="btnGRP"
+            onclick="choisirBalisage('GRP')">
+        GRP
+    </button>
+
+    <button type="button" id="btnPR"
+            onclick="choisirBalisage('PR')">
+        PR
+    </button>
+
+    <button type="button" id="btnAucun"
+            onclick="choisirBalisage('Aucun')">
+        Aucun
+    </button>
+
+    <button type="button" id="btnAutre"
+            onclick="choisirBalisage('Autre')">
+        Autre
+    </button>
+</div>
+<div id="zoneAutreBalisage" style="display:none;">
+
+    <label>Autre :</label>
+
+    <input
+        type="text"
+        id="balisageAutre"
+        placeholder="Précisez le balisage">
+
+</div>
 
 <br><br>
+  
 
-<label>Agglo :</label>
-<select id="agglo">
-    <option value=""></option>
-    <option value="E">E</option>
-    <option value="S">S</option>
-</select>
 
-<br><br>
+<div class="ligneChoix">
 
-<label>Cheminement :</label>
-<select id="cheminement">
-    <option value=""></option>
-    <option value="R">R</option>
-    <option value="NR">NR</option>
-</select>
+    <label>Agglo :</label>
 
-<br><br>
+    <input type="hidden" id="agglo" value="H">
+
+    <div id="blocAgglo">
+
+        <button type="button"
+                id="btnHorsAgglo"
+                
+                onclick="choisirAgglo('H')">
+            Hors agglo
+        </button>
+
+        <button type="button"
+                id="btnEnAgglo"
+                
+                onclick="choisirAgglo('A')">
+            En agglo
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="ligneChoix">
+
+    <label>Cheminement :</label>
+   <input type="hidden" id="cheminement" value="R">
+
+    <div id="blocCheminement">
+
+        <button type="button"
+                id="btnRevetu"
+                
+                onclick="choisirCheminement('R')">
+            Revêtu
+        </button>
+
+        <button type="button"
+                id="btnNonRevetu"
+                
+                onclick="choisirCheminement('NR')">
+            Non revêtu
+        </button>
+
+    </div>
+
+</div>
 
 <label>Signalétique :</label>
-<select id="signaletique">
-    <option value=""></option>
-    <option value="DIR">DIR</option>
-    <option value="FLE">FLE</option>
-    <option value="DEP">DEP</option>
-    <option value="INFO">INFO</option>
-    <option value="SECU">SECU</option>
+
+<input type="hidden" id="signaletique">
+
+<div id="ligneSignaletique">
+
+    
+
+    <button id="btnDIR"
+            type="button"
+            onclick="choisirSignaletique('DIR')">
+        Poteau
+    </button>
+
+    <button id="btnFLE"
+            type="button"
+            onclick="choisirSignaletique('FLE')">
+        Flèche
+    </button>
+
+    <button id="btnDEP"
+            type="button"
+            onclick="choisirSignaletique('DEP')">
+        Départ
+    </button>
+
+    <button id="btnINFO"
+            type="button"
+            onclick="choisirSignaletique('INFO')">
+        Info
+    </button>
+
+    <button id="btnSECU"
+            type="button"
+            onclick="choisirSignaletique('SECU')">
+        Sécurité
+    </button>
+<button id="btnSigAucun"
+            type="button"
+            onclick="choisirSignaletique('AUCUN')">
+        Aucune
+    </button>
+    <button id="btnSigAutre"
+            type="button"
+            onclick="choisirSignaletique('AUTRE')">
+        Autre
+    </button>
+
+</div>
+
+<div id="zoneAutreSignaletique" style="display:none;">
+
+    <div class="titreChampDictee">
+        <label>Préciser la signalétique :</label>
+
+        <button id="btnDicteeAutreSignaletique" type="button">
+            🎤 Dicter
+        </button>
+    </div>
+
+    <input type="text"
+           id="signaletiqueAutre"
+           placeholder="Préciser la signalétique">
+
+</div>
+
+<br><br>
+
+<label>Sécurité :</label>
+
+<input type="hidden" id="securite">
+
+<div id="ligneSecurite1">
+
+  
+
+    <button id="btnTraversee"
+            type="button"
+            onclick="choisirSecurite('TRAVERSEE')">
+        Traversée
+    </button>
+
+    <button id="btnCirculation"
+            type="button"
+            onclick="choisirSecurite('CIRCULATION')">
+        Circulation
+    </button>
+
+    <button id="btnVisibilite"
+            type="button"
+            onclick="choisirSecurite('VISIBILITE')">
+        Visibilité
+    </button>
+ <button id="btnGlissant"
+            type="button"
+            onclick="choisirSecurite('GLISSANT')">
+        Sol glissant
+    </button>
+</div>
+
+<div id="ligneSecurite2">
+
+   
+
+    <button id="btnSecAutre"
+            type="button"
+            onclick="choisirSecurite('AUTRE')">
+        Autre
+    </button>
+
+</div>
+
+<div id="zoneAutreSecurite" style="display:none;">
+
+    <div class="titreChampDictee">
+        <label>Préciser le problème :</label>
+
+        <button id="btnDicteeAutreSecurite" type="button">
+            🎤 Dicter
+        </button>
+    </div>
+
+    <input
+        type="text"
+        id="securiteAutre"
+        placeholder="Préciser le problème">
+
+</div>
+
+<br><br>
+
+<label>Nuisances :</label>
+
+<select id="nuisances" onchange="gererNuisance()">
+    <option value="">Choisir une nuisance...</option>
+    <option value="BRUIT_ROUTIER">Bruit routier</option>
+    <option value="BRUIT_INDUSTRIEL">Bruit industriel</option>
+    <option value="ODEURS">Odeurs</option>
+    <option value="DEPOTS">Dépôts sauvages</option>
+    <option value="LIGNE_ELEC">Ligne électrique</option>
+    <option value="CARRIERE">Carrière</option>
+    <option value="URBANISATION">Urbanisation</option>
+    <option value="TRAVAUX">Travaux</option>
+    <option value="CHASSE">Chasse</option>
+    <option value="AUTRE">Autre</option>
 </select>
 
+<div id="zoneAutreNuisance" style="display:none;">
+
+    <div class="titreChampDictee">
+        <label>Préciser la nuisance :</label>
+
+        <button id="btnDicteeAutreNuisance" type="button">
+            🎤 Dicter
+        </button>
+    </div>
+
+    <input
+        type="text"
+        id="autreNuisance"
+        placeholder="Préciser la nuisance">
+
+</div>
+
+
+<div class="titreChampDictee">
+
+    <label>POI / POV :</label>
+
+    <button id="btnDicteePoiPov" type="button">
+        🎤 Dicter
+    </button>
+
+</div>
+
+<textarea id="poiPov" rows="3"></textarea>
+
 <br><br>
 
-<label>PK :</label>
-<input type="text" id="pk">
+<div class="titreChampDictee">
+
+    <label>Pas à pas :</label>
+
+    <button id="btnDicteePasAPas" type="button">
+        🎤 Dicter
+    </button>
+
+</div>
+
+<textarea id="pasAPas" rows="4"></textarea>
 
 <br><br>
 
-<label>Entre pas :</label>
-<input type="text" id="entrePas">
+
+<div class="titreChampDictee">
+
+    <label>Observation(s) :</label>
+
+    <button id="btnDicteeObsNuisance" type="button">
+        🎤 Dicter
+    </button>
+
+</div>
+
+<textarea id="obsNuisance" rows="3"></textarea>
 
 <br><br>
 
-<label>Sécurité :</label><br>
-<textarea id="securite" rows="3" cols="40"></textarea>
-
-<br><br>
-
-<label>Nuisances :</label><br>
-<textarea id="nuisances" rows="3" cols="40"></textarea>
-
-<br><br>
-
-<label>POI / POV :</label><br>
-<textarea id="poiPov" rows="3" cols="40"></textarea>
-
-<br><br>
-
-<label>Pas à pas :</label><br>
-<textarea id="pasAPas" rows="4" cols="40"></textarea>
-
-<br><br>
-
-<button id="btnEnregistrer">
-Enregistrer
-</button>
-
-<button id="btnSupprimer">
-Supprimer WP
-</button>
-
-<button id="btnExporter">
-Exporter CSV
-</button>
-<button id="btnExporterGPX">
-Exporter GPX
-</button>
-<button id="btnExporterTrace">
-Exporter trace réelle
-</button>
-
-<button id="btnSauvegarder">
-Sauvegarder relevé
-</button>
-
-<button id="btnOuvrir">
-Ouvrir relevé
-</button>
-<button id="btnGPS">
-GPS OFF
-</button>
-<span id="precisionGPS"></span>
-<button id="btnWPGPS">
-WP GPS
+<button id="btnPhoto" type="button">
+    📷 Ajouter une photo
 </button>
 <input
     type="file"
-    id="fichierReleve"
-    accept=".json"
-    style="display:none;"
->
+    id="photoWaypoint"
+    accept="image/*"
+    capture="environment"
+    multiple
+    style="display:none">
+
+<br><br>
+
+<button id="btnEnregistrer">Enregistrer</button>
+
+<button id="btnAnnuler">Annuler</button>
+
+<button id="btnSupprimer">Supprimer WP</button>
 
 </div>
-<div id="ficheWP">
+</div>
+</div>
+
+<div id="fenetreCollecte" class="modal cache">
+
+    <div class="modal-contenu">
+
+        <h2>Attention ! Une collecte non terminée est en attente de reprise</h2>
+
+        <div id="resumeCollecte"></div>
+
+        <div class="modal-boutons">
+
+            <button id="btnReprendreCollecte"
+        onclick="reprendreCollecte()">
+    ▶ Reprendre
+</button>
+
+            <button id="btnFermerCollecte">
+                ⏳ Reprendre plus tard
+            </button>
+
+            <button id="btnSupprimerCollecte">
+                🗑 Supprimer cette collecte
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="menuPhotos" class="cache">
+
+    <div class="contenuMenuPhotos">
+
+        <h3>Photos</h3>
+
+        <button id="btnAjouterPhoto">
+            📸 Ajouter une photo
+        </button>
+
+        <button id="btnVoirPhotos">
+            🖼 Voir les photos
+        </button>
+
+       
+        <button id="btnFermerMenuPhotos">
+            Fermer
+        </button>
+
+    </div>
+
+</div>
+
+<div id="versionCDSI"></div>
+
+<div id="visionneusePhotos">
+
+    <div class="contenuVisionneuse">
+
+        <img id="imagePhoto" src="" alt="Photo du waypoint">
+
+        <h2 id="referencePhoto">XXXXXXXX</h2>
+
+        <label for="commentairePhoto">
+            Commentaire
+        </label>
+
+        <textarea
+            id="commentairePhoto"
+            rows="3"
+            placeholder="Décrivez cette photo...">
+        </textarea>
+
+        <button id="btnEnregistrerCommentairePhoto">
+            💾 Enregistrer
+        </button>
+
+        <p id="messageCommentaire" class="messageCache">
+            ✅ Commentaire enregistré
+        </p>
+
+        <div id="navigationPhotos">
+
+                <button id="btnPhotoPrecedente">
+                ◀
+                </button>
+
+                <span id="compteurPhotos">
+                    1 / 1
+                </span>
+
+                <button id="btnPhotoSuivante">
+                    ▶
+                </button>
+
+        </div>
+
+        <button id="btnSupprimerPhotoVisionneuse">
+            🗑 Supprimer
+        </button>
+
+        <button id="btnFermerVisionneuse">
+            Fermer
+        </button>
+
+    </div>
+
+</div>
+<div id="dialogCommentairePhoto" class="cache">
+
+    <div class="contenuDialogue">
+
+       <div class="enteteNouvellePhoto">
+
+    <h3>📷 Nouvelle photo</h3>
+
+    <span id="referenceNouvellePhoto"></span>
+
+</div>
+
+        <textarea
+            id="nouveauCommentairePhoto"
+            rows="3"
+            placeholder="Décrivez cette photo...">
+        </textarea>
+
+        <button id="btnDicteePhoto" type="button">
+    🎤 Dicter
+</button>
+
+        <button id="btnValiderCommentairePhoto">
+            ✅ Valider
+        </button>
+
+        <button id="btnAnnulerCommentairePhoto">
+            ❌ Annuler
+        </button>
+
+    </div>
+
+</div>
+
+<div id="fenetreFinCollecte" class="modal cache">
+ <div class="modal-contenu">
+
+        <h2>🏁 Terminer la collecte</h2>
+
+        <div id="resumeFinCollecte"></div>
+        <hr>
+
+        <div class="modal-boutons">
+
+            <button id="btnContinuerCollecte">
+                ▶ Erreur, continuer la collecte.
+            </button>
+
+            <button id="btnArchiverCollecte">
+                🏁 Terminer et archiver la collecte.
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
 
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-omnivore/0.3.4/leaflet-omnivore.min.js"></script>
+<!-- ========================================= -->
+<!-- Initialisation d'une nouvelle collecte    -->
+<!-- ========================================= -->
+
+<div id="fenetreInitialisation" class="cache">
+
+        <div class="contenuFenetre">
+
+            <h2>🚶 Initialisation</h2>
+
+            <div class="champEnLigne">
+
+            <label for="nomCollecteInitial">
+                Nom de la collecte
+            </label>
+
+            <input
+                type="text"
+            id="nomCollecteInitial">
+
+        </div>
+    
+            <div class="titreChampDictee">
+
+                <label>Commune de départ</label>
+
+                <button id="btnDicteeCommuneDepart" type="button">
+                    🎤 Dicter
+                </button>
+
+            </div>
+
+        <input
+        type="text"
+        id="communeDepart">     
+
+
+        <div class="titreChampDictee">
+
+            <label>Lieu de départ</label>
+
+            <button id="btnDicteeLieuDepart" type="button">
+            🎤 Dicter
+            </button>
+
+        </div>
+
+        <input
+            type="text"
+            id="lieuDepart">
+      
+
+       <div class="titreChampDictee">
+
+            <label>Accès</label>
+
+            <button id="btnDicteeAccesDepart" type="button">
+                🎤 Dicter
+            </button>
+
+        </div>
+
+        <textarea
+            id="accesDepart"
+            rows="1"></textarea>
+
+       <label>Collecteurs</label>
+
+        <input
+            type="text"
+            id="collecteurs"
+            placeholder="🔴 Nom des collecteurs (trices) manquant">
+
+        <label>Vitesse moyenne de référence (km/h)</label>
+
+        <input
+            type="number"
+            id="vitesseMoyenne"
+            value="3.5"
+            step="0.1"
+            min="1"
+            max="10">
+
+        <div class="boutonsInitialisation">
+
+            <button id="btnDemarrerCollecte">
+                ▶ Commencer la collecte
+            </button>
+
+            <button id="btnAnnulerInitialisation">
+                Annuler
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script src="js/leaflet.js"></script>
+<script src="js/leaflet-omnivore.min.js"></script>
+<script src="js/carte.js"></script>
+<script src="js/gpx.js"></script>
+<script src="js/gps.js"></script>
+<script src="js/photos.js"></script>
+<script src="js/waypoints.js"></script>
+<script src="js/dictee.js"></script>
+<script src="js/sauvegarde.js"></script>
+<script src="js/debug.js"></script>
+<script src="js/jszip.min.js"></script>
+<script src="js/export.js?v=2"></script>
+<script src="js/export_GPX.js"></script>
+
+<script src="js/xlsx.bundle.js"></script>
 <script src="js/app.js"></script>
 
 </body>
+
 </html>

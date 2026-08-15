@@ -1,63 +1,1626 @@
-#carte {
-    height: 400px;
-    width: 100%;
+/*
+    CDSI69
+    Version : 2.11
+    Fichier : package.json
+
+    Auteurs :
+        Claude Frey
+        OpenAI ChatGPT
+
+    Rôle :
+        Interface principale de l'application.
+
+    Architecture V2.11
+
+        +__index.html
+        +__manifest.json
+        +__package.json
+        +__package-lock.json
+        +__service-worker.js
+        +__test-gps.html
+        +__Version.txt
+        +__vite.config.js
+        |
+        |__js
+            +__app.js
+            +__carte.js
+            +__gps.js
+            +__gpx.js
+            +__waypoints.js
+        |__css
+            +__style.js
+        |__Documents
+            +__CDSI69_Carnet_d_architecture_v1
+        |__icones
+            +__icon-192.png
+            +__icin-512.png
+        |__images
+        |__node_modules
+*/
+/* ==========================
+   ÉCRAN DE PRÉPARATION
+   ========================== */
+/* ==========================
+   ÉCRAN DE PRÉPARATION
+   ========================== */
+body{font-family:Arial,sans-serif;background:#eef2f3;margin:0;padding:20px}
+#cdsi_preparation{max-width:430px;margin:auto;background:white;padding:20px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.mode{display:block;margin:14px 0;padding:10px;border:1px solid #ccc;border-radius:8px}
+.cache{display:none}
+#btnEnregistrer,
+#btnAnnuler,
+#btnSupprimer,
+input[type=text] {
+
+    width:100%;
+    padding:12px;
+    box-sizing:border-box;
+    margin-top:10px;
+
 }
 
-body {
-    font-family: Arial, sans-serif;
-     margin: 0;
+#btnEnregistrer {
 
-    padding: 5px;
+    background: #1F4E79;
 
-    overflow-x: hidden;
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+#btnEnregistrer:hover {
+
+    background: #2A6496;
+
+}
+
+#btnAnnuler {
+
+    background: #5DADE2;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+#btnAnnuler:hover {
+
+    background: #3498DB;
+
+}
+
+#btnSupprimer {
+
+    background: #8B0000;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+#btnSupprimer:hover {
+
+    background: #A52A2A;
+
+}  
+
+
+#etatPreparation{margin-top:15px;border-top:1px solid #ddd;padding-top:8px}
+
+
+/* ==========================
+   CARTE
+   ========================== */
+
+#carte{
+
+    height:55vh;
+
+    border:1px solid #999;
+
+    border-radius:10px;
+
+    margin:10px 0;
+
+}
+/* ==========================
+   FENÊTRE WAYPOINT
+   ========================== */
+#overlay {
+
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.45);
+
+    z-index: 900;
 
 }
 
 #ficheWP {
 
-    margin-top: 15px;
+    display: none;
 
-    padding: 10px;
+    position: fixed;
 
-    border: 2px solid black;
+    top: 10px;
 
-    background-color: #f5f5f5;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 90%;
+
+    max-width: 520px;
+
+    max-height: calc(100dvh - 20px);
+
+    overflow-y: auto;
+
+    box-sizing: border-box;
+
+    background: white;
+
+    border: 2px solid #666;
+
+    border-radius: 10px;
+
+    padding: 15px;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+
+    z-index: 1000;
 
 }
-#nomGPXAffiche {
 
-    margin-top: 5px;
+#titreWaypoint {
 
-    font-weight: bold;
+    margin-top: 0;
 
-    color: darkblue;
+    margin-bottom: 15px;
+
+    text-align: center;
+
+    font-size: 1.3em;
+
+    border-bottom: 1px solid #ccc;
+
+    padding-bottom: 8px;
 
 }
-#carte {
-    height: 400px;
+
+
+.infosCalcul {
+
+    background: #f5f5f5;
+
+    border-radius: 6px;
+
+    padding: 8px;
+
+    margin-bottom: 10px;
+
+}
+/* ==========================
+   TABLEAU DE BORD
+   ========================== */
+
+/* ==========================
+   CARTE
+   ========================== */
+
+/* ==========================
+   FENÊTRE WAYPOINT
+   ========================== */
+#overlay {
+
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
     width: 100%;
-}
+    height: 100%;
 
-body {
-    font-family: Arial, sans-serif;
-}
-#ficheWP {
+    background: rgba(0,0,0,0.45);
 
-    margin-top: 15px;
-
-    padding: 10px;
-
-    border: 1px solid black;
-
-    background-color: #f5f5f5;
+    z-index: 900;
 
 }
-#nomGPXAffiche {
 
-    margin-top: 5px;
+
+
+#titreWaypoint {
+
+    margin-top: 0;
+
+    margin-bottom: 15px;
+
+    text-align: center;
+
+    font-size: 1.3em;
+
+    border-bottom: 1px solid #ccc;
+
+    padding-bottom: 8px;
+
+}
+
+
+
+/* ==========================
+   TABLEAU DE BORD
+   ========================== */
+   #tableauDeBord{
+
+    background:white;
+
+    border:1px solid #bbb;
+
+    border-radius:10px;
+
+    padding:10px;
+
+    margin-bottom:10px;
+
+    box-shadow:0 2px 6px rgba(0,0,0,.12);
+
+}
+#tdbLigne1{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:8px;
+
+}
+
+#tdbCircuit{
+
+    flex:1;
+
+    font-weight:bold;
+
+    font-size:1.05em;
+
+    text-align:center;
+
+}
+
+#tdbInfos{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+
+}
+
+.ligneInfos{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    width:100%;
+
+    font-size:0.90em;
+
+    font-weight:bold;
+
+}
+
+.ligneInfos{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:4px;
+
+}
+
+.toggle-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#btnCheminement{
+    width:100%;
+    padding:12px;
+    font-size:18px;
+    font-weight:bold;
+    border-radius:8px;
+    border:1px solid #666;
+    background:#d9d9d9;
+    cursor:pointer;
+}
+#btnAgglo{
+    width:100%;
+    padding:12px;
+    font-size:18px;
+    font-weight:bold;
+    border-radius:8px;
+    border:1px solid #666;
+    background:#B8F0B8;
+    cursor:pointer;
+}
+.selectionne {
+
+    background: #4CAF50;
+    color: white;
+
+}
+#blocBalisage {
+
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+
+}
+
+#blocBalisage button {
+
+    flex: 1;
+
+    height: 30px;
+
+    font-size: 13px;
+
+    border-radius: 4px;
+
+}
+#ligneBalisage {
+
+    display: flex;
+
+    gap: 4px;
+
+    margin-top: 4px;
+
+}
+#ligneBalisage button {
+
+    flex: 1;
+
+    height: 30px;
+
+    font-size: 13px;
+
+    border-radius: 4px;
+
+    margin: 0;
+
+}
+#blocAgglo button,
+#blocCheminement button {
+
+    flex: 1;
+    height: 30px;
+    font-size: 13px;
+    border-radius: 4px;
+
+}
+
+
+.selectionne {
+
+    background-color: #4CAF50;
+    color: white;
+
+}
+.ligneChoix {
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+
+}
+
+.ligneChoix label {
+
+    width: 110px;
+    margin: 0;
+}
+
+#blocSignaletique {
+
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+
+}
+
+#blocSignaletique button {
+
+    flex: 1;
+
+    height: 30px;
+
+    font-size: 13px;
+
+    border-radius: 4px;
+
+}
+#ligneSignaletique {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+
+}
+#ligneSignaletique button {
+
+    flex: 1;
+
+    height: 30px;
+
+    font-size: 13px;
+
+    border-radius: 4px;
+
+    margin: 0;
+
+}
+
+#ligneSecurite1,
+#ligneSecurite2 {
+
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+
+}
+
+#ligneSecurite1 button,
+#ligneSecurite2 button {
+
+    flex: 1;
+    height: 30px;
+    font-size: 13px;
+    border-radius: 4px;
+    margin: 0;
+
+}
+#nuisances {
+
+    width: 100%;
+    height: 32px;
+    font-size: 14px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+
+}
+
+#obsNuisance {
+
+    width: 100%;
+    font-size: 14px;
+    box-sizing: border-box;
+
+}
+#poiPov,
+#pasAPas {
+
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 14px;
+
+}
+#nomGPX {
+
+    font-weight: bold;
+    color: #c00000;
+    margin-top: 8px;
+
+}
+#tdbLigne1 {
+
+    display: flex;
+    align-items: center;
+
+}
+
+#btnRetourCollecte {
+
+    font-size: 24px;
 
     font-weight: bold;
 
-    color: darkblue;
+    width: 44px;
+    height: 44px;
 
+    margin-right: 8px;
+
+    cursor: pointer;
+}
+
+#tdbCircuit {
+
+    font-weight: bold;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    flex: 1;
+
+}
+
+#barreBoutons {
+
+    margin-top: 8px;
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+}
+
+#barreBoutons button {
+
+    flex: 1;
+
+}
+
+#barreBoutons button {
+
+    flex: 1;
+
+    padding: 12px 8px;
+
+    font-size: 1.05em;
+
+    font-weight: bold;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition: 0.2s;
+
+}
+
+#btnWaypoint {
+
+    background: #1F4E79;
+
+}
+
+#btnWaypoint:hover {
+
+    background: #2A6496;
+
+}
+
+#btnTerminerCollecte {
+
+        background: #8B0000;
+
+}
+
+#btnTerminerCollecte:hover {
+
+    background: #A52A2A;
+
+}
+
+.cache {
+    display: none;
+}
+.modal {
+
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.45);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 9999;
+
+}
+
+.modal.cache {
+
+    display: none;
+
+}
+
+.modal-contenu {
+
+    background: white;
+
+    width: 90%;
+
+    max-width: 450px;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    text-align: center;
+
+    box-shadow: 0 0 20px rgba(0,0,0,.4);
+
+}
+
+.modal-boutons {
+
+    margin-top: 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+.iconeWP {
+
+    background: white;
+    border: 2px solid #0066cc;
+    border-radius: 50%;
+
+    width: 18px;
+    height: 18px;
+
+    line-height: 22px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    color: black;
+
+    box-shadow: 0 0 3px rgba(0,0,0,.5);
+
+}
+
+#btnPhoto {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin: 8px 0;
+
+    font-size: 1.1em;
+
+    font-weight: bold;
+
+    color: white;
+
+    background: #1F4E79;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition: 0.2s;
+
+}
+
+#btnPhoto:hover {
+
+    background: #2A6496;
+
+}
+
+
+#menuPhotos{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.4);
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:3000;
+
+}
+
+#menuPhotos.visible{
+
+    display:flex !important;
+
+}
+
+
+.contenuMenuPhotos{
+
+    background:white;
+
+    border-radius:10px;
+
+    padding:20px;
+
+    width:85%;
+
+    max-width:320px;
+
+}
+
+.contenuMenuPhotos h3{
+
+    text-align:center;
+
+    margin-top:0;
+
+}
+
+.contenuMenuPhotos button {
+
+    display: block;
+
+    width: 100%;
+
+    margin: 8px 0;
+
+    padding: 12px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    color: white;
+
+    background: #1F4E79;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+.contenuMenuPhotos button:hover {
+
+    background: #2A6496;
+
+}
+
+#visionneusePhotos {
+
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.85);
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 4000;
+
+}
+
+#visionneusePhotos.visible {
+
+    display: flex;
+    
+}
+
+.contenuVisionneuse {
+
+
+    text-align: center;
+
+}
+
+#imagePhoto {
+
+    max-width: 90vw;
+
+    max-height: 50vh;
+
+    border-radius: 8px;
+
+    background: white;
+
+}
+
+
+#navigationPhotos {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+#compteurPhotos {
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    min-width: 60px;
+
+    text-align: center;
+
+}
+
+#btnFermerVisionneuse {
+
+    width: 100px;
+
+    margin-top: 10px;
+
+    padding: 10px 15px;
+
+    font-size: 0.95em;
+
+    font-weight: bold;
+
+    color: white;
+
+    background: #5DADE2;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+#btnFermerVisionneuse:hover {
+
+    background: #3498DB;
+
+}
+
+#btnSupprimerPhotoVisionneuse {
+ width: 100px;
+
+    margin-top: 10px;
+
+    padding: 10px 15px;
+
+    font-size: 0.95em;
+
+    font-weight: bold;
+
+    color: white;
+
+    background: #8B0000;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+#btnSupprimerPhotoVisionneuse:hover {
+
+    background: #A52A2A;
+
+}
+
+#btnSupprimerPhotoVisionneuse,
+#btnFermerVisionneuse {
+
+    width: 150px;
+    height: 42px;
+
+    box-sizing: border-box;
+
+    white-space: nowrap;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+}
+
+
+#enteteWP {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+#titreWaypoint {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+#referencePhoto {
+
+    font-size: 1.2em;
+
+    font-weight: bold;
+
+    color: white;
+
+    margin: 8px 0 12px 0;
+
+}
+
+#commentairePhoto {
+
+    width: 90%;
+
+    min-height: 90px;
+
+    margin: 10px auto;
+
+    display: block;
+
+    box-sizing: border-box;
+
+    font-size: 1.05em;
+
+}
+
+#btnEnregistrerCommentairePhoto {
+
+    width: 90%;
+
+    padding: 10px;
+
+    margin: 10px auto;
+
+    display: block;
+
+    font-size: 1.1em;
+
+    font-weight: bold;
+
+}
+#messageCommentaire {
+
+    color: #3cb371;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    margin: 8px 0;
+
+}
+
+.messageCache {
+
+    display: none;
+
+}
+
+.messageVisible {
+
+    display: block;
+
+}
+
+#dialogCommentairePhoto {
+
+    display: none;
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.75);
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 5000;
+
+}
+
+#dialogCommentairePhoto.visible {
+
+    display: flex;
+
+}
+
+.contenuDialogue {
+
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    width: 90%;
+
+    max-width: 500px;
+
+    text-align: center;
+
+}
+
+/* =====================================================
+   FENÊTRE NOUVELLE PHOTO
+   ===================================================== */
+
+
+.enteteNouvellePhoto {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 8px;
+
+}
+
+.enteteNouvellePhoto h3 {
+
+    margin: 0;
+
+    font-size: 1.15em;
+
+}
+
+#referenceNouvellePhoto {
+
+    margin: 0;
+
+    font-size: 1.05em;
+
+    font-weight: bold;
+
+}
+
+
+/* ----- Commentaire ----- */
+
+#nouveauCommentairePhoto {
+    width: 90%;
+
+    min-height: 70px;
+
+    margin: 10px auto;
+
+    display: block;
+
+    box-sizing: border-box;
+
+    font-size: 1.05em;
+
+    padding: 8px;
+
+}
+
+
+/* ----- Les trois boutons ----- */
+
+#btnDicteePhoto,
+#btnValiderCommentairePhoto,
+#btnAnnulerCommentairePhoto {
+
+    width: 30%;
+
+    padding: 8px 3px;
+
+    margin: 4px 1%;
+
+    font-size: 0.95em;
+
+    font-weight: bold;
+       border: none;
+
+  border-radius: 12px !important;
+
+    cursor: pointer;
+
+} 
+
+/* ========================================= */
+/* Initialisation de la collecte             */
+/* ========================================= */
+
+#fenetreInitialisation {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.45);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 3000;
+
+}
+
+#fenetreInitialisation.cache {
+
+    display: none;
+    }
+
+#fenetreInitialisation .contenuFenetre {
+
+    background: white;
+
+    width: 90%;
+
+    max-width: 520px;
+
+    max-height: calc(100dvh - 20px);
+
+    overflow-y: auto;
+
+    box-sizing: border-box;
+
+    border-radius: 12px;
+
+    padding: 20px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+
+}
+
+#fenetreInitialisation h2 {
+
+    text-align: center;
+
+    margin-top: 0;
+
+    margin-bottom: 20px;
+
+    color: #005a9c;
+
+}
+
+#fenetreInitialisation label {
+
+    display: block;
+
+    font-weight: bold;
+
+    margin-top: 15px;
+      margin-bottom: 5px;
+
+}
+
+#fenetreInitialisation input,
+#fenetreInitialisation textarea {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 8px;
+
+    font-size: 16px;
+
+    border: 1px solid #cfd8dc;
+
+    border-radius: 8px;
+
+}
+
+
+
+.boutonsInitialisation {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: 25px;
+
+}
+
+#btnDemarrerCollecte,
+#btnAnnulerInitialisation {
+
+    flex: 1;
+
+    padding: 12px 8px;
+
+    font-size: 1.05em;
+
+    font-weight: bold;
+
+    color: white;
+
+    background: #1F4E79;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+#btnDemarrerCollecte:hover,
+#btnAnnulerInitialisation:hover {
+
+    background: #2A6496;
+
+}
+
+
+#titreAccueil {
+
+    text-align: center;
+
+    color: #1F4E79;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    margin-top: 15px;
+
+    margin-bottom: 25px;
+
+}
+
+#questionAccueil {
+
+    text-align: center;
+
+    font-size: 18px;
+
+    color: #444;
+
+    margin-bottom: 12px;
+
+}
+.mode {
+
+    display: block;
+
+    background: #ffffff;
+
+    border: 1px solid #cfd8dc;
+
+    border-radius: 12px;
+
+    padding: 8px;
+
+    margin: 6px 0;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+}
+.mode:hover {
+
+    background: #f4f8fb;
+
+    border-color: #1F4E79;
+
+}
+.mode input[type="radio"] {
+
+    display: none;
+
+}
+.mode strong {
+
+    font-size: 18px;
+
+    color: #1F4E79;
+
+}
+
+.mode small {
+
+    color: #666;
+
+}
+#btnOuvrirCollecte {
+
+    display: block;
+
+    width: 100%;
+
+    background: white;
+
+    border: 1px solid #cfd8dc;
+
+    border-radius: 12px;
+
+    padding: 16px;
+
+    margin: 18px 0;
+
+    font-size: 18px;
+
+    color: #1F4E79;
+
+    text-align: left;
+
+    cursor: pointer;
+
+}
+#btnOuvrirCollecte:hover {
+
+    background: #f4f8fb;
+
+    border-color: #1F4E79;
+
+}
+#btnCommencer {
+
+    display: block;
+
+    width: 75%;
+
+    margin: 12px auto;
+
+    padding: 12px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    background: #1F4E79;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+#btnCommencer:hover {
+
+    background: #2A6496;
+
+}
+#btnCommencer:disabled {
+
+    background: #B0B0B0;
+
+    cursor: not-allowed;
+
+}
+
+#btnContinuerCollecte,
+#btnArchiverCollecte {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin: 6px 0;
+
+    font-size: 1.05em;
+
+    font-weight: bold;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition: 0.2s;
+
+}
+#btnContinuerCollecte {
+
+    background: #1F4E79;
+
+}
+
+#btnContinuerCollecte:hover {
+
+    background: #2A6496;
+
+}
+
+#btnArchiverCollecte {
+
+    background: #8B0000;
+
+}
+
+#btnArchiverCollecte:hover {
+
+    background: #A52A2A;
+
+}
+
+.titreChampDictee {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 4px;
+
+}
+
+.titreChampDictee button {
+
+    padding: 4px 8px;
+
+    font-size: 0.95em;
+    
+    border-radius: 8px;
+
+
+}
+
+#ficheWP input,
+#ficheWP textarea,
+#ficheWP select {
+
+    border: 1px solid #cfd8dc;
+
+    border-radius: 8px;
+
+    box-sizing: border-box;
+
+}
+
+#nomTrace {
+
+    border: 1px solid #cfd8dc;
+
+    border-radius: 8px;
+
+    box-sizing: border-box;
+
+}
+.btnAide {
+    border-radius: 8px;
+}
+
+#etatMode,
+#etatCircuit {
+    display: none;
+}
+#nomTrace::placeholder {
+    color: #d00000;
+    opacity: 1;
+}
+
+#fenetreInitialisation .champEnLigne {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+#fenetreInitialisation .champEnLigne label {
+    margin: 0;
+    white-space: nowrap;
+}
+
+#fenetreInitialisation .champEnLigne input {
+    flex: 1;
 }
