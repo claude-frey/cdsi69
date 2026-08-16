@@ -97,9 +97,10 @@ function telechargerCollecte(collecte) {
 
     lien.click();
 
+setTimeout(function () {
     document.body.removeChild(lien);
-
     URL.revokeObjectURL(url);
+}, 1000);
 
 }
 
