@@ -76,7 +76,6 @@ function construireObjetCollecte() {
 
 function telechargerCollecte(collecte) {
 
-    alert("TEST : telechargerCollecte() est bien exécutée");
 
     const contenu = JSON.stringify(collecte, null, 2);
 
@@ -92,7 +91,7 @@ function telechargerCollecte(collecte) {
 
 
 
-    lien.download = collecte.nomCollecte + ".cdsi69";
+    lien.download = collecte.nomCollecte + ".txt";
 
     document.body.appendChild(lien);
 
