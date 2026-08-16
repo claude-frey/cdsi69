@@ -467,7 +467,22 @@ const url =
 
 if (fenetreZIP) {
 
-    fenetreZIP.location.href = url;
+    fenetreZIP.document.body.innerHTML =
+        "<h2>✅ Collecte prête</h2>" +
+        "<p>Le fichier ZIP de votre collecte est prêt.</p>" +
+        "<p>Touchez le bouton ci-dessous pour le télécharger.</p>" +
+        "<a href='" + url + "' download='" +
+        collecte.nomCollecte +
+        ".zip' " +
+        "style='display:inline-block;" +
+        "padding:18px 25px;" +
+        "font-size:18px;" +
+        "background:#2e7d32;" +
+        "color:white;" +
+        "text-decoration:none;" +
+        "border-radius:8px;'>" +
+        "📦 Télécharger le ZIP" +
+        "</a>";
 
 } else {
 
