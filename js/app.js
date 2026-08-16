@@ -767,32 +767,52 @@ function continuerCollecte() {
 
 }
 
-function archiverCollecte() {
- 
+async function archiverCollecte() {
+
     const collecte = construireObjetCollecte();
 
-// Téléchargement de la sauvegarde
- // TEST : uniquement le fichier de sauvegarde
-telechargerCollecte(collecte);
+    // =============================================
+    // Création et téléchargement du ZIP unique
+    // =============================================
 
-//exporterExcel(collecte);
+    const succes = await exporterCollecteZIP(collecte);
 
-//exporterGPX(collecte);
+    // =============================================
+    // Si le ZIP n'a pas pu être créé :
+    // on conserve la collecte sauvegardée
+    // =============================================
 
-//exporterPhotos(collecte);
+    if (!succes) {
 
+        alert(
+            "⚠️ La collecte n'a pas été supprimée.\n\n" +
+            "Le fichier ZIP n'a pas pu être créé.\n" +
+            "La collecte reste sauvegardée sur ce téléphone."
+        );
 
- alert(
-    "✅ Cette collecte est terminée.\n\n" +
-    "Les 4 fichiers suivants ont été créés et enregistrés dans le répertoire Download de ce téléphone :\n\n" +
-    "📄 " + collecte.nomCollecte + ".cdsi69\n" +
-    "📊 " + collecte.nomCollecte + ".xlsx\n" +
-    "🗺️ " + collecte.nomCollecte + "_enrichi.gpx\n" +
-    "📷 " + collecte.nomCollecte + "_Photos.zip"
+        return;
+    }
 
-);
-  
-setTimeout(function () {
+    // =============================================
+    // ZIP créé : la collecte est terminée
+    // =============================================
+
+    alert(
+        "✅ Cette collecte est terminée.\n\n" +
+        "Le fichier suivant a été créé :\n\n" +
+        "📦 " +
+        collecte.nomCollecte +
+        ".zip\n\n" +
+        "Il contient :\n" +
+        "• la sauvegarde CDSI69\n" +
+         "• le fichier Excel\n" +
+        "• le GPX enrichi\n" +
+        "• les photos dans le dossier Photos"
+    );
+
+    // =============================================
+    // Nettoyage après réussite
+    // =============================================
 
     nettoyerCollecteInterrompue();
 
@@ -804,15 +824,19 @@ setTimeout(function () {
     fermerFenetreFinCollecte();
     majInterface();
 
-    document.getElementById("cdsi_preparation").style.display = "block";
-    document.getElementById("cdsi_collecte").style.display = "none";
+    document.getElementById("cdsi_preparation").style.display =
+        "block";
+
+    document.getElementById("cdsi_collecte").style.display =
+        "none";
+
     document.getElementById("nomTrace").value = "";
+
     document.getElementById("nomGPX").textContent =
         "Aucun circuit sélectionné";
 
-}, 100);
-
 }
+
 
 function fermerFenetreFinCollecte() {
     
