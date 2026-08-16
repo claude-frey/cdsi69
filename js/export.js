@@ -453,7 +453,7 @@ alert(
         // =============================================
 
         const url =
-            URL.createObjectURL(contenuZip);
+              URL.createObjectURL(contenuZipFinal);
 
         const lien =
             document.createElement("a");
