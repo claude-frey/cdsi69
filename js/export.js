@@ -79,7 +79,7 @@ function telechargerCollecte(collecte) {
     const contenu = JSON.stringify(collecte, null, 2);
 
     const blob = new Blob([contenu], {
-    type: "application/octet-stream"
+    type: "application/json"
 });
 
     const url = URL.createObjectURL(blob);
