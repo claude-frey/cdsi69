@@ -461,22 +461,10 @@ alert(
         // =============================================
 
         const url =
-              URL.createObjectURL(contenuZipFinal);
+    URL.createObjectURL(contenuZipFinal);
 
-        const lien =
-            document.createElement("a");
+window.open(url, "_blank");
 
-        lien.href = url;
-
-        lien.download =
-            collecte.nomCollecte + ".zip";
-
-        document.body.appendChild(lien);
-
-        lien.click();
-
-        document.body.removeChild(lien);
-          setTimeout(function() {
 
             URL.revokeObjectURL(url);
 
