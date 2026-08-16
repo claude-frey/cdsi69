@@ -278,6 +278,8 @@ function exporterPhotos(collecte) {
 
 async function exporterCollecteZIP(collecte) {
 
+    const fenetreZIP = window.open("", "_blank");
+
     try {
 
         // =============================================
@@ -456,19 +458,30 @@ alert(
     " Ko"
 );
 
-        // =============================================
-        // Téléchargement du ZIP unique
-        // =============================================
+// =============================================
+// Téléchargement du ZIP unique
+// =============================================
 
-        const url =
+const url =
     URL.createObjectURL(contenuZipFinal);
 
-window.open(url, "_blank");
+if (fenetreZIP) {
 
+    fenetreZIP.location.href = url;
 
-            URL.revokeObjectURL(url);
+} else {
 
-        }, 1000);
+    alert(
+        "Le navigateur a bloqué l'ouverture du fichier ZIP."
+    );
+
+}
+
+setTimeout(function() {
+
+    URL.revokeObjectURL(url);
+
+}, 1000);
 
         console.log(
             "CDSI69 : ZIP complet créé."
