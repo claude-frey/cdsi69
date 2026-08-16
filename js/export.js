@@ -434,6 +434,13 @@ async function exporterCollecteZIP(collecte) {
                 type: "blob"
             });
 
+alert(
+    "ZIP créé en mémoire.\n\n" +
+    "Taille : " +
+    Math.round(contenuZip.size / 1024) +
+    " Ko"
+);
+
         // =============================================
         // Téléchargement du ZIP unique
         // =============================================
