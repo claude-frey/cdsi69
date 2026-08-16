@@ -467,11 +467,25 @@ const url =
 
 if (fenetreZIP) {
 
-    fenetreZIP.document.body.innerHTML =
+    fenetreZIP.document.open();
+
+    fenetreZIP.document.write(
+        "<!DOCTYPE html>" +
+        "<html lang='fr'>" +
+        "<head>" +
+        "<meta charset='utf-8'>" +
+        "<meta name='viewport' content='width=device-width, initial-scale=1'>" +
+        "<title>CDSI69 - Collecte prête</title>" +
+        "</head>" +
+        "<body style='font-family:Arial,sans-serif;text-align:center;padding:30px;'>" +
+
         "<h2>✅ Collecte prête</h2>" +
+
         "<p>Le fichier ZIP de votre collecte est prêt.</p>" +
-        "<p>Touchez le bouton ci-dessous pour le télécharger.</p>" +
-        "<a href='" + url + "' download='" +
+
+        "<a href='" +
+        url +
+        "' download='" +
         collecte.nomCollecte +
         ".zip' " +
         "style='display:inline-block;" +
@@ -481,8 +495,16 @@ if (fenetreZIP) {
         "color:white;" +
         "text-decoration:none;" +
         "border-radius:8px;'>" +
+
         "📦 Télécharger le ZIP" +
-        "</a>";
+
+        "</a>" +
+
+        "</body>" +
+        "</html>"
+    );
+
+    fenetreZIP.document.close();
 
 } else {
 
@@ -492,11 +514,6 @@ if (fenetreZIP) {
 
 }
 
-setTimeout(function() {
-
-    URL.revokeObjectURL(url);
-
-}, 1000);
 
         console.log(
             "CDSI69 : ZIP complet créé."
