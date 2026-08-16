@@ -429,10 +429,17 @@ async function exporterCollecteZIP(collecte) {
         // Création du ZIP
         // =============================================
 
-        const contenuZip =
-            await zip.generateAsync({
-                type: "blob"
-            });
+ const contenuZip =
+    await zip.generateAsync({
+        type: "blob"
+    });
+
+const contenuZipFinal = new Blob(
+    [contenuZip],
+    {
+        type: "application/octet-stream"
+    }
+);
 
 alert(
     "ZIP créé en mémoire.\n\n" +
