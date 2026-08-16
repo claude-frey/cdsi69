@@ -76,6 +76,8 @@ function construireObjetCollecte() {
 
 function telechargerCollecte(collecte) {
 
+    alert("TEST : telechargerCollecte() est bien exécutée");
+
     const contenu = JSON.stringify(collecte, null, 2);
 
     const blob = new Blob([contenu], {
