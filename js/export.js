@@ -440,6 +440,14 @@ const contenuZipFinal = new Blob(
         type: "application/octet-stream"
     }
 );
+alert(
+    "ZIP FINAL\n\n" +
+    "Taille : " +
+    contenuZipFinal.size +
+    " octets\n\n" +
+    "Type : " +
+    contenuZipFinal.type
+);
 
 alert(
     "ZIP créé en mémoire.\n\n" +
