@@ -771,13 +771,14 @@ function archiverCollecte() {
     const collecte = construireObjetCollecte();
 
 // Téléchargement de la sauvegarde
-   telechargerCollecte(collecte);
+ // TEST : uniquement le fichier de sauvegarde
+telechargerCollecte(collecte);
 
-   exporterExcel(collecte);
+//exporterExcel(collecte);
 
-   exporterGPX(collecte);
+//exporterGPX(collecte);
 
-   exporterPhotos(collecte);
+//exporterPhotos(collecte);
 
 
  alert(
