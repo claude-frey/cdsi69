@@ -1,5 +1,5 @@
-function exporterGPX(collecte) {
-
+function exporterGPX(collecte, pourZIP = false) {
+//16 08 2026
     if (!collecte) {
         alert("Aucune collecte à exporter.");
         return;
@@ -174,30 +174,36 @@ gpx += '</wpt>\n';
     // Création du fichier GPX
     // =============================================
 
-    const blob = new Blob(
-        [gpx],
-        {
-            type: "application/gpx+xml"
-        }
-    );
+const blob = new Blob(
+    [gpx],
+    {
+        type: "application/gpx+xml"
+    }
+);
 
-    const url =
-        URL.createObjectURL(blob);
+if (pourZIP) {
 
-    const lien =
-        document.createElement("a");
+    return blob;
 
-    lien.href = url;
+}
 
-    lien.download =
-        collecte.nomCollecte +
-        "_enrichi.gpx";
+const url =
+    URL.createObjectURL(blob);
 
-    document.body.appendChild(lien);
+const lien =
+    document.createElement("a");
 
-    lien.click();
+lien.href = url;
 
-    document.body.removeChild(lien);
+lien.download =
+    collecte.nomCollecte +
+    "_enrichi.gpx";
 
-    URL.revokeObjectURL(url);
+document.body.appendChild(lien);
+
+lien.click();
+
+document.body.removeChild(lien);
+
+URL.revokeObjectURL(url);
 }

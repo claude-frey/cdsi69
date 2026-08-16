@@ -1,5 +1,5 @@
 function construireObjetCollecte() {
-
+//16 08 2026
     const collecte = {
 
     version: "2.12",
@@ -74,14 +74,19 @@ function construireObjetCollecte() {
 }
 
 
-function telechargerCollecte(collecte) {
-
+function telechargerCollecte(collecte, pourZIP = false) {
 
     const contenu = JSON.stringify(collecte, null, 2);
 
     const blob = new Blob([contenu], {
-    type: "application/x-binary"
-});
+        type: "application/octet-stream"
+    });
+
+    if (pourZIP) {
+
+        return blob;
+
+    }
 
     const url = URL.createObjectURL(blob);
 
@@ -89,18 +94,15 @@ function telechargerCollecte(collecte) {
 
     lien.href = url;
 
-
-
-    lien.download = collecte.nomCollecte + ".txt";
+    lien.download = collecte.nomCollecte + ".cdsi69";
 
     document.body.appendChild(lien);
 
     lien.click();
 
-setTimeout(function () {
     document.body.removeChild(lien);
+
     URL.revokeObjectURL(url);
-}, 1000);
 
 }
 
@@ -268,5 +270,222 @@ function exporterPhotos(collecte) {
             );
 
         });
+
+}
+// ======================================================
+// Export complet de la collecte dans un ZIP unique
+// ======================================================
+
+async function exporterCollecteZIP(collecte) {
+
+    try {
+
+        // =============================================
+        // Création du ZIP principal
+        // =============================================
+
+        const zip = new JSZip();
+
+        // =============================================
+        // Les 3 fichiers principaux
+        // =============================================
+
+        const fichierCDSI69 =
+            telechargerCollecte(collecte, true);
+
+        const fichierExcel =
+            exporterExcel(collecte, true);
+
+        const fichierGPX =
+            exporterGPX(collecte, true);
+
+        zip.file(
+            collecte.nomCollecte + ".cdsi69",
+            fichierCDSI69
+        );
+
+        zip.file(
+            collecte.nomCollecte + ".xlsx",
+            fichierExcel
+        );
+
+        zip.file(
+              collecte.nomCollecte + "_enrichi.gpx",
+            fichierGPX
+        );
+
+        // =============================================
+        // Dossier Photos
+        // =============================================
+
+        const dossierPhotos =
+            zip.folder("Photos");
+
+        let nombrePhotos = 0;
+
+        const promesses = [];
+
+        // =============================================
+        // Parcours des waypoints
+        // =============================================
+
+        for (let i = 0; i < waypoints.length; i++) {
+
+            const wp = waypoints[i];
+
+            if (!wp.photos || wp.photos.length === 0) {
+                continue;
+            }
+
+            // =========================================
+            // Parcours des photos du WP
+            // =========================================
+
+            for (let j = 0; j < wp.photos.length; j++) {
+
+                const photo = wp.photos[j];
+
+                nombrePhotos++;
+                // -------------------------------------
+                // Extension de la photo
+                // -------------------------------------
+
+                const extension =
+                    photo.nom.substring(
+                        photo.nom.lastIndexOf(".")
+                    );
+
+                const nomFichier =
+                    photo.reference + extension;
+
+                const descriptif =
+                    photo.commentaire &&
+                    photo.commentaire.trim() !== ""
+                        ? photo.commentaire
+                        : "Photo sans descriptif";
+
+                // -------------------------------------
+                // Photo encore disponible
+                // -------------------------------------
+
+                if (photo.fichier instanceof Blob) {
+
+                    dossierPhotos.file(
+                        nomFichier,
+                        photo.fichier
+                    );
+
+                    dossierPhotos.file(
+                        photo.reference + ".txt",
+                        descriptif
+                    );
+
+                    continue;
+                }
+                  // -------------------------------------
+                // Photo à récupérer dans IndexedDB
+                // -------------------------------------
+
+                const promesse =
+                    recupererPhotoDepuisBDD(photo.idBDD)
+
+                    .then(function(photoBDD) {
+
+                        if (
+                            !photoBDD ||
+                            !photoBDD.fichier
+                        ) {
+
+                            throw new Error(
+                                "Photo introuvable : " +
+                                photo.reference
+                            );
+
+                        }
+
+                        dossierPhotos.file(
+                            nomFichier,
+                            photoBDD.fichier
+                        );
+
+                        dossierPhotos.file(
+                            photo.reference + ".txt",
+                            descriptif
+                        );
+
+                    });
+
+                promesses.push(promesse);
+            }
+             }
+
+        // =============================================
+        // Attendre que toutes les photos soient prêtes
+        // =============================================
+
+        await Promise.all(promesses);
+
+        // =============================================
+        // Création du ZIP
+        // =============================================
+
+        const contenuZip =
+            await zip.generateAsync({
+                type: "blob"
+            });
+
+        // =============================================
+        // Téléchargement du ZIP unique
+        // =============================================
+
+        const url =
+            URL.createObjectURL(contenuZip);
+
+        const lien =
+            document.createElement("a");
+
+        lien.href = url;
+
+        lien.download =
+            collecte.nomCollecte + ".zip";
+
+        document.body.appendChild(lien);
+
+        lien.click();
+
+        document.body.removeChild(lien);
+          setTimeout(function() {
+
+            URL.revokeObjectURL(url);
+
+        }, 1000);
+
+        console.log(
+            "CDSI69 : ZIP complet créé."
+        );
+
+        console.log(
+            "CDSI69 : " +
+            nombrePhotos +
+            " photo(s) ajoutée(s)."
+        );
+
+        return true;
+
+    } catch (erreur) {
+
+        console.error(
+            "CDSI69 : erreur export ZIP :",
+            erreur
+        );
+
+        alert(
+            "❌ Erreur lors de la création du ZIP :\n\n" +
+            erreur.message
+        );
+
+        return false;
+
+    }
 
 }

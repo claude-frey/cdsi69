@@ -37,6 +37,7 @@ ajInterface
             |__images
             |__node_modules
 */
+//16 08 2026
 'use strict';
 
 const VERSION_CDSI = "V2.13.0-dev01 30 07 11h32";
@@ -944,7 +945,7 @@ function calculerStatistiquesCollecte(collecte) {
 
 }
 
-function exporterExcel(collecte) {
+function exporterExcel(collecte, pourZIP = false) {
 
     const stats =
     calculerStatistiquesCollecte(collecte);
@@ -1512,8 +1513,26 @@ ws["!cols"] = [
     );
 
  
+if (pourZIP) {
 
-   XLSX.writeFile(
+    const contenuExcel = XLSX.write(
+        wb,
+        {
+            bookType: "xlsx",
+            type: "array"
+        }
+    );
+
+    return new Blob(
+        [contenuExcel],
+        {
+            type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        }
+    );
+
+}
+
+XLSX.writeFile(
     wb,
     collecte.nomCollecte + ".xlsx"
 );
