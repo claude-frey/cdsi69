@@ -160,10 +160,9 @@ function verifierDemarrage(){
     return;
 
 }
-    const gpsOK =
-    etatGPS.textContent.startsWith("🟢") ||
-    etatGPS.textContent.startsWith("🟡");
-
+const gpsOK =
+    latitudeGPS !== null &&
+    longitudeGPS !== null;
 
 if (
     modeGPX.checked &&
