@@ -343,7 +343,7 @@ async function chargerCollecte(event) {
 
             collecteActive = collecte;
 
-            afficherCollecteInterrompue(collecte);
+           afficherRepriseCollecteArchivee(collecte);
 
             collecte.waypoints.forEach(
                 restaurerWaypoint
@@ -393,4 +393,52 @@ async function chargerCollecte(event) {
     };
 
     lecteur.readAsText(fichier);
+}
+
+function afficherRepriseCollecteArchivee(collecte) {
+
+    const date =
+        collecte.dateSauvegarde
+            ? new Date(collecte.dateSauvegarde)
+            : null;
+
+    document.getElementById("resumeRepriseArchivee").innerHTML =
+
+        "<p><b>Nom de la collecte :</b><br>" +
+        (collecte.nomCollecte || "Collecte sans nom") +
+        "</p>" +
+
+        "<p><b>Date de la collecte :</b><br>" +
+        (date
+            ? date.toLocaleString("fr-FR")
+            : "Date inconnue") +
+        "</p>" +
+
+        "<p><b>Dernier WP enregistré :</b><br>WP " +
+        (collecte.waypoints
+            ? collecte.waypoints.length
+            : 0) +
+        "</p>";
+
+    document.getElementById("fenetreRepriseArchivee")
+        .classList.remove("cache");
+}
+
+function reprendreCollecteArchivee() {
+
+    document.getElementById("fenetreRepriseArchivee")
+        .classList.add("cache");
+
+    reprendreCollecteDepuisFichier();
+
+}
+
+
+function annulerRepriseArchivee() {
+
+    document.getElementById("fenetreRepriseArchivee")
+        .classList.add("cache");
+
+    collecteActive = null;
+
 }

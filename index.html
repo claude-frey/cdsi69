@@ -94,13 +94,17 @@
     <small>(sans trace GPX)</small>
     </label>
 
-    <label class="mode">
     <button id="btnOuvrirCollecte"
         onclick="ouvrirCollecte()">
-    <strong>Reprendre une collecte</strong><br>
-    <small>(ouvrir un fichier .zip ou .cdsi69)</small>
-    </button>
-    </label>
+
+    <strong>Reprendre une collecte</strong>
+
+    <small>
+        (ouvrir un fichier .zip ou .cdsi69<br>
+        dans le répertoire Download du téléphone)
+    </small>
+
+</button>
 
 
     <input
@@ -593,9 +597,9 @@
         <div class="modal-boutons">
 
             <button id="btnReprendreCollecte"
-        onclick="reprendreCollecte()">
-    ▶ Reprendre
-</button>
+                onclick="reprendreCollecte()">
+                ▶ Reprendre
+            </button>
 
             <button id="btnFermerCollecte">
                 ⏳ Reprendre plus tard
@@ -610,6 +614,28 @@
     </div>
 
 </div>
+
+<div id="fenetreRepriseArchivee" class="modal cache">
+
+    <div class="modal-contenu">
+
+        <h2>Reprise de la collecte</h2>
+
+        <div id="resumeRepriseArchivee"></div>
+
+        <div class="modal-boutons">
+
+            <button id="btnReprendreArchivee"
+                onclick="reprendreCollecteArchivee()">
+                ▶ Reprendre
+            </button>
+
+            <button id="btnAnnulerRepriseArchivee"
+                onclick="annulerRepriseArchivee()">
+                Annuler
+            </button>
+
+        </div>
 
 <div id="menuPhotos" class="cache">
 
