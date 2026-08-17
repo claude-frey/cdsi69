@@ -278,7 +278,7 @@ function exporterPhotos(collecte) {
 
 async function exporterCollecteZIP(collecte) {
 
-    const fenetreZIP = window.open("", "_blank");
+    const fenetreZIP = null;
 
     try {
 
