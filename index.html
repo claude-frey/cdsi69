@@ -102,14 +102,15 @@
 
 
     <button id="btnOuvrirCollecte"
-            onclick="ouvrirCollecte()">
-        <strong>Reprendre une collecte</strong>
-    </button>
+        onclick="ouvrirCollecte()">
+    <strong>Reprendre une collecte<br>
+    (fichier .zip ou .cdsi69)</strong>
+</button>
 
     <input
         type="file"
         id="fichierCollecte"
-        accept=".cdsi69"
+        accept=".cdsi69,.zip"
         style="display:none"
         onchange="chargerCollecte(event)">
 

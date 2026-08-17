@@ -294,24 +294,103 @@ function ouvrirCollecte() {
 
 //--------------------------------------------------
 
-function chargerCollecte(event) {
-   
+async function chargerCollecte(event) {
+
     const fichier = event.target.files[0];
 
     if (!fichier) return;
+
+    // =============================================
+    // Cas d'un fichier ZIP
+    // =============================================
+
+    if (fichier.name.toLowerCase().endsWith(".zip")) {
+
+        try {
+
+            const zip =
+                await JSZip.loadAsync(fichier);
+
+            let nomCDSI69 = null;
+
+            Object.keys(zip.files).forEach(function(nom) {
+
+                if (
+                    nom.toLowerCase().endsWith(".cdsi69") &&
+                    !zip.files[nom].dir
+                ) {
+
+                    nomCDSI69 = nom;
+
+                }
+
+            });
+
+            if (!nomCDSI69) {
+
+                alert(
+                    "❌ Aucun fichier .cdsi69 trouvé dans ce ZIP."
+                );
+                        return;
+            }
+
+            const contenu =
+                await zip.files[nomCDSI69]
+                    .async("text");
+
+            const collecte =
+                JSON.parse(contenu);
+
+            collecteActive = collecte;
+
+            afficherCollecteInterrompue(collecte);
+
+            collecte.waypoints.forEach(
+                restaurerWaypoint
+            );
+
+        } catch (erreur) {
+
+            alert(
+                "❌ Impossible d'ouvrir la collecte :\n\n" +
+                erreur.message
+            );
+
+        }
+
+        return;
+    }
+      // =============================================
+    // Cas d'un ancien fichier .cdsi69
+    // =============================================
 
     const lecteur = new FileReader();
 
     lecteur.onload = function(e) {
 
-        const collecte = JSON.parse(e.target.result);
+        try {
 
-        collecteActive = collecte;
+            const collecte =
+                JSON.parse(e.target.result);
 
-        afficherCollecteInterrompue(collecte);
-        collecte.waypoints.forEach(restaurerWaypoint);
+            collecteActive = collecte;
+
+            afficherCollecteInterrompue(collecte);
+
+            collecte.waypoints.forEach(
+                restaurerWaypoint
+            );
+
+        } catch (erreur) {
+
+            alert(
+                "❌ Impossible de lire la collecte :\n\n" +
+                erreur.message
+            );
+
+        }
+
     };
 
     lecteur.readAsText(fichier);
-
 }
