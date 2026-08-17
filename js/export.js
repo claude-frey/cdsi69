@@ -465,54 +465,27 @@ alert(
 const url =
     URL.createObjectURL(contenuZipFinal);
 
-if (fenetreZIP) {
+const lien =
+    document.createElement("a");
 
-    fenetreZIP.document.open();
+lien.href = url;
 
-    fenetreZIP.document.write(
-        "<!DOCTYPE html>" +
-        "<html lang='fr'>" +
-        "<head>" +
-        "<meta charset='utf-8'>" +
-        "<meta name='viewport' content='width=device-width, initial-scale=1'>" +
-        "<title>CDSI69 - Collecte prête</title>" +
-        "</head>" +
-        "<body style='font-family:Arial,sans-serif;text-align:center;padding:30px;'>" +
+lien.download =
+    collecte.nomCollecte + ".zip";
 
-        "<h2>✅ Collecte prête</h2>" +
+lien.style.display = "none";
 
-        "<p>Le fichier ZIP de votre collecte est prêt.</p>" +
+document.body.appendChild(lien);
 
-        "<a href='" +
-        url +
-        "' download='" +
-        collecte.nomCollecte +
-        ".zip' " +
-        "style='display:inline-block;" +
-        "padding:18px 25px;" +
-        "font-size:18px;" +
-        "background:#2e7d32;" +
-        "color:white;" +
-        "text-decoration:none;" +
-        "border-radius:8px;'>" +
+lien.click();
 
-        "📦 Télécharger le ZIP" +
+document.body.removeChild(lien);
 
-        "</a>" +
+setTimeout(function() {
 
-        "</body>" +
-        "</html>"
-    );
+    URL.revokeObjectURL(url);
 
-    fenetreZIP.document.close();
-
-} else {
-
-    alert(
-        "Le navigateur a bloqué l'ouverture du fichier ZIP."
-    );
-
-}
+}, 1000);
 
 
         console.log(
