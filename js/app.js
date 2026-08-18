@@ -40,6 +40,17 @@ ajInterface
 
 'use strict';
 
+window.onerror = function(message, source, lineno, colno, erreur) {
+
+    alert(
+        "ERREUR JAVASCRIPT\n\n" +
+        message +
+        "\n\nLigne : " +
+        lineno
+    );
+
+};
+
 const VERSION_CDSI = "V2.13.0-dev01 30 07 11h32";
 
 //document.getElementById("versionCDSI").textContent =
