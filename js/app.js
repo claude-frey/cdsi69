@@ -196,13 +196,12 @@ const prep=document.getElementById('cdsi_preparation');
 const collecte=document.getElementById('cdsi_collecte');
 const btn=document.getElementById('btnCommencer');
 
-alert("Installation du bouton Commencer");
 
 btn.addEventListener(
     "click",
     function () {
 
-        alert("Clic sur Commencer détecté.");
+      
 
         ouvrirFenetreInitialisation();
 
