@@ -1,4 +1,4 @@
-ChatGPT/*
+/*ChatGPT
     CDSI69
     Version : 2.11
     Fichier : package.json
