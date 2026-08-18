@@ -745,7 +745,14 @@ alert("Étape 3");
     document
         .getElementById("fenetreInitialisation")
         .classList.remove("cache");
-alert("Étape 4");
+
+const fenetre = document.getElementById("fenetreInitialisation");
+
+alert(
+    "Classe : " + fenetre.className +
+    "\nAffichage : " + getComputedStyle(fenetre).display
+);
+
 }
 
 function fermerFenetreInitialisation() {
