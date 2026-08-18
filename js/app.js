@@ -204,7 +204,13 @@ const btn=document.getElementById('btnCommencer');
 
 btn.addEventListener(
     "click",
-    ouvrirFenetreInitialisation
+    function () {
+
+        alert("Clic sur Commencer détecté.");
+
+        ouvrirFenetreInitialisation();
+
+    }
 );
 document
     .getElementById("btnWaypoint")
