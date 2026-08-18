@@ -40,17 +40,11 @@ ajInterface
 
 'use strict';
 
-alert("08h27");
+alert("15h46");
 
 window.onerror = function(message, source, lineno, colno, erreur) {
 
-    alert(
-        "ERREUR JAVASCRIPT\n\n" +
-        message +
-        "\n\nLigne : " +
-        lineno
-    );
-
+    
 };
 
 const VERSION_CDSI = "V2.13.0-dev01 30 07 11h32";
@@ -723,8 +717,8 @@ function reinitialiserInterface() {
 
 function ouvrirFenetreInitialisation() {
 
-    alert("ouvrirFenetreInitialisation est exécutée");
-    alert("Étape 1");
+    
+   
 
     if (modeGPX.checked) {
 
@@ -736,22 +730,30 @@ function ouvrirFenetreInitialisation() {
         document.getElementById("nomCollecteInitial").value =
             nomTrace.value.trim();
 
-          alert("Étape 2");  
+        
 
     }
 
     document.getElementById("vitesseMoyenne").value = 3.5;
-alert("Étape 3");
+
     document
         .getElementById("fenetreInitialisation")
         .classList.remove("cache");
 
+     
+
 const fenetre = document.getElementById("fenetreInitialisation");
+
+fenetre.classList.remove("cache");
+
+fenetre.style.background = "red";
 
 alert(
     "Classe : " + fenetre.className +
     "\nAffichage : " + getComputedStyle(fenetre).display
 );
+
+
 
 }
 
