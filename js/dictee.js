@@ -255,9 +255,4 @@ document
 
         }
     );
-    if (idChamp === "nouveauCommentairePhoto") {
-
-    bouton =
-        document.getElementById("btnDicteePhoto");
-
-}
+  
