@@ -1,4 +1,4 @@
-/*
+ChatGPT/*
     CDSI69
     Version : 2.11
     Fichier : package.json
@@ -150,43 +150,39 @@ zoneTrace.style.display = 'none';
   verifierDemarrage();
 }
 
-function verifierDemarrage(){
+function verifierDemarrage() {
 
     let ok = false;
+
     if (MODE_DEBUG) {
 
-    btnCommencer.disabled = false;
+        btnCommencer.disabled = false;
 
-    return;
+        return;
+    }
 
-}
-const gpsOK =
-    latitudeGPS !== null &&
-    longitudeGPS !== null;
+    const gpsOK =
+        latitudeGPS !== null &&
+        longitudeGPS !== null;
 
-if (
-    modeGPX.checked &&
-    etatCircuit.textContent.startsWith("🟢") &&
-    gpsOK
-) {
-    ok = true;
-}
+    if (
+        modeGPX.checked &&
+        gpsOK
+    ) {
 
-if (
-    modeSansGPX.checked &&
-    etatCircuit.textContent.startsWith("🟢") &&
-    gpsOK
-) {
-    ok = true;
-}
+        ok = true;
+    }
 
+    if (
+        modeSansGPX.checked &&
+        gpsOK
+    ) {
 
+        ok = true;
+    }
 
     btnCommencer.disabled = !ok;
-
-   
 }
-
 
 
 // -------- Migration V2.03a --------
@@ -196,9 +192,14 @@ const btn=document.getElementById('btnCommencer');
 
 btn.addEventListener(
     "click",
-    ouvrirFenetreInitialisation
-);
+    function () {
 
+        alert("Le bouton Commencer fonctionne.");
+
+        ouvrirFenetreInitialisation();
+
+    }
+);
 document
     .getElementById("btnWaypoint")
     .addEventListener(
@@ -771,14 +772,14 @@ async function archiverCollecte() {
     const collecte = construireObjetCollecte();
 
     // =============================================
-    // Création et téléchargement du ZIP unique
+    // Création et export du ZIP unique
     // =============================================
 
-    const succes = await exporterCollecteZIP(collecte);
+    const succes =
+        await exporterCollecteZIP(collecte);
 
     // =============================================
-    // Si le ZIP n'a pas pu être créé :
-    // on conserve la collecte sauvegardée
+    // Si le ZIP n'a pas pu être créé
     // =============================================
 
     if (!succes) {
@@ -793,7 +794,7 @@ async function archiverCollecte() {
     }
 
     // =============================================
-    // ZIP créé : la collecte est terminée
+    // ZIP créé : collecte terminée
     // =============================================
 
     alert(
@@ -801,10 +802,10 @@ async function archiverCollecte() {
         "Le fichier suivant a été créé :\n\n" +
         "📦 " +
         collecte.nomCollecte +
-        ".zip\n\n" +
+          ".zip\n\n" +
         "Il contient :\n" +
         "• la sauvegarde CDSI69\n" +
-         "• le fichier Excel\n" +
+        "• le fichier Excel\n" +
         "• le GPX enrichi\n" +
         "• les photos dans le dossier Photos"
     );
@@ -833,7 +834,6 @@ async function archiverCollecte() {
 
     document.getElementById("nomGPX").textContent =
         "Aucun circuit sélectionné";
-
 }
 
 
