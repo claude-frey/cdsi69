@@ -352,7 +352,9 @@ async function mettreAJourBatterie() {
     let tdbBatterie =
         document.getElementById("tdbBatterie");
 
-     
+    if (!tdbBatterie) {
+        return;
+    }
 
     if (!navigator.getBattery) {
 
@@ -363,9 +365,8 @@ async function mettreAJourBatterie() {
 
     let batterie =
         await navigator.getBattery();
-        
 
-function afficherBatterie() {
+    function afficherBatterie() {
 
         let niveau =
             Math.round(batterie.level * 100);
@@ -385,15 +386,15 @@ function afficherBatterie() {
             icone + " " + niveau + " %";
 
     }
-
-    afficherBatterie();
+  afficherBatterie();
 
     batterie.addEventListener(
         "levelchange",
         afficherBatterie
     );
 
-}
+}    
+
 function getTraceParcourue() {
     return traceParcourue;
 }

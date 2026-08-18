@@ -37,7 +37,7 @@ ajInterface
             |__images
             |__node_modules
 */
-//16 08 2026
+
 'use strict';
 
 const VERSION_CDSI = "V2.13.0-dev01 30 07 11h32";
