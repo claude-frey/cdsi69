@@ -40,7 +40,7 @@ ajInterface
 
 'use strict';
 
-alert("08h15");
+alert("08h27");
 
 window.onerror = function(message, source, lineno, colno, erreur) {
 
@@ -724,6 +724,7 @@ function reinitialiserInterface() {
 function ouvrirFenetreInitialisation() {
 
     alert("ouvrirFenetreInitialisation est exécutée");
+    alert("Étape 1");
 
     if (modeGPX.checked) {
 
