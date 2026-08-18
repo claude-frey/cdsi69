@@ -873,7 +873,23 @@
 
 </div>
 
+<script>
 
+window.onerror = function(message, source, lineno, colno, erreur) {
+
+    alert(
+        "ERREUR JAVASCRIPT\n\n" +
+        message +
+        "\n\nFichier : " +
+        source +
+        "\n\nLigne : " +
+        lineno
+    );
+
+    return false;
+};
+
+</script>
 
 <script src="js/leaflet.js"></script>
 <script src="js/leaflet-omnivore.min.js"></script>
