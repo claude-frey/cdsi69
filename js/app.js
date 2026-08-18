@@ -47,7 +47,7 @@ const VERSION_CDSI = "V2.13.0-dev01 30 07 11h32";
 
 
     let carte = null;
-//const MODE_DEBUG = false;   // Mettre à true pendant les phases de développement
+const MODE_DEBUG = false;   // Mettre à true pendant les phases de développement
 //const MODE_DEBUG = true
 const modeGPX=document.getElementById('modeGPX');
 const modeSansGPX=document.getElementById('modeSansGPX');
@@ -192,13 +192,7 @@ const btn=document.getElementById('btnCommencer');
 
 btn.addEventListener(
     "click",
-    function () {
-
-        alert("Le bouton Commencer fonctionne.");
-
-        ouvrirFenetreInitialisation();
-
-    }
+    ouvrirFenetreInitialisation
 );
 document
     .getElementById("btnWaypoint")
