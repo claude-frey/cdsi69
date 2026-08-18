@@ -40,7 +40,7 @@ ajInterface
 
 'use strict';
 
-alert("15h57");
+alert("16h05");
 
 window.onerror = function(message, source, lineno, colno, erreur) {
 
@@ -738,6 +738,14 @@ function ouvrirFenetreInitialisation() {
 
 const fenetre =
     document.getElementById("fenetreInitialisation");
+
+alert(
+    "Parent : " +
+    fenetre.parentElement.id +
+    "\nParent display : " +
+    getComputedStyle(fenetre.parentElement).display
+);
+
 
 alert("Élément trouvé : " + (fenetre !== null));
 
