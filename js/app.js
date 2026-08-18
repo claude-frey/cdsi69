@@ -736,14 +736,16 @@ function ouvrirFenetreInitialisation() {
         document.getElementById("nomCollecteInitial").value =
             nomTrace.value.trim();
 
+          alert("Étape 2");  
+
     }
 
     document.getElementById("vitesseMoyenne").value = 3.5;
-
+alert("Étape 3");
     document
         .getElementById("fenetreInitialisation")
         .classList.remove("cache");
-
+alert("Étape 4");
 }
 
 function fermerFenetreInitialisation() {
