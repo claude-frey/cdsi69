@@ -1,3 +1,5 @@
+//16h44
+
 function dicterTexte(idChamp) {
 
     const champ = document.getElementById(idChamp);
