@@ -40,7 +40,7 @@ ajInterface
 
 'use strict';
 
-alert("CDSI69 : app.js est exécuté");
+alert("08h15");
 
 window.onerror = function(message, source, lineno, colno, erreur) {
 
