@@ -723,6 +723,8 @@ function reinitialiserInterface() {
 
 function ouvrirFenetreInitialisation() {
 
+    alert("ouvrirFenetreInitialisation est exécutée");
+
     if (modeGPX.checked) {
 
         document.getElementById("nomCollecteInitial").value =
