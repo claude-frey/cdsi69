@@ -1,4 +1,4 @@
-//16h44
+//17h21
 
 function dicterTexte(idChamp) {
 
