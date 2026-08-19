@@ -76,23 +76,13 @@ function enregistrerPhotoDansBDD(photo) {
                     NOM_MAGASIN_PHOTOS
                 );
 
-alert(
-    "ENREGISTREMENT PHOTO\n\n" +
-    "id = [" + photo.id + "]\n" +
-    "idBDD = [" + photo.idBDD + "]\n" +
-    "reference = [" + photo.reference + "]"
-);
-
 
             const requete =
                 magasin.put(photo);
 
           requete.onsuccess = function() {
 
-    alert(
-        "Photo enregistrée dans IndexedDB : " +
-        photo.id
-    );
+    
 
     resolve();
 
@@ -131,7 +121,7 @@ alert(
                     NOM_MAGASIN_PHOTOS
                 );
 
-alert("ID photo demandé : [" + id + "]");
+
 
             const requete =
                 magasin.get(id);

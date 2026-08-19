@@ -442,21 +442,7 @@ const contenuZipFinal = new Blob(
         type: "application/octet-stream"
     }
 );
-alert(
-    "ZIP FINAL\n\n" +
-    "Taille : " +
-    contenuZipFinal.size +
-    " octets\n\n" +
-    "Type : " +
-    contenuZipFinal.type
-);
 
-alert(
-    "ZIP créé en mémoire.\n\n" +
-    "Taille : " +
-    Math.round(contenuZip.size / 1024) +
-    " Ko"
-);
 
 // =============================================
 // Téléchargement du ZIP unique
@@ -477,14 +463,11 @@ lien.style.display = "none";
 
 document.body.appendChild(lien);
 
-alert(
-    "Téléchargement du ZIP\n\n" +
-    "Nom : " + lien.download
-);
+
 
 lien.click();
 
-alert("Clic sur le lien de téléchargement exécuté.");
+
 
 document.body.removeChild(lien);
 
@@ -492,7 +475,7 @@ setTimeout(function() {
 
     URL.revokeObjectURL(url);
 
-}, 10000);
+}, 1000);
 
 
         console.log(
