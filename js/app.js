@@ -791,6 +791,9 @@ fenetre.classList.remove("cache");
 
 
 fenetre.style.background = "red";
+fenetre.style.width = "100vw";
+fenetre.style.height = "100vh";
+
 
 alert("Fond rouge appliqué");
 
