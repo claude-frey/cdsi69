@@ -737,6 +737,15 @@ const fenetre =
     document.getElementById("fenetreInitialisation");
 
     alert(
+    "Parent : " +
+    fenetre.parentElement.tagName +
+    "\nID : " +
+    fenetre.parentElement.id +
+    "\nClasse : " +
+    fenetre.parentElement.className
+);
+
+    alert(
     "BODY : " +
     (fenetre.parentElement === document.body) +
     "\nHTML : " +
