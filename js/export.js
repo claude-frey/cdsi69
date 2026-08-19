@@ -492,7 +492,7 @@ setTimeout(function() {
 
     URL.revokeObjectURL(url);
 
-}, 1000);
+}, 10000);
 
 
         console.log(
