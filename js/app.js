@@ -743,6 +743,11 @@ const fenetre =
     fenetre.outerHTML.substring(0, 100)
 );
 
+alert(
+    "Nombre de fenetres : " +
+    document.querySelectorAll("#fenetreInitialisation").length
+);
+
     alert(
     "width CSS : " +
     getComputedStyle(fenetre).width +
