@@ -737,6 +737,13 @@ const fenetre =
     document.getElementById("fenetreInitialisation");
 
     alert(
+    "BODY : " +
+    (fenetre.parentElement === document.body) +
+    "\nHTML : " +
+    fenetre.outerHTML.substring(0, 100)
+);
+
+    alert(
     "width CSS : " +
     getComputedStyle(fenetre).width +
     "\nheight CSS : " +
