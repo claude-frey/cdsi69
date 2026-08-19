@@ -50,16 +50,16 @@ function construireObjetCollecte() {
                 photos: wp.photos.map(function(photo) {
                 return {
                     id: photo.id,
+                    idBDD: photo.idBDD,
                     reference: photo.reference,
                     nom: photo.nom,
                     type: photo.type,
                     taille: photo.taille,
                     date: photo.date,
                     commentaire: photo.commentaire
+                };
 
-                    };
-
-                })
+})
 
             };
 

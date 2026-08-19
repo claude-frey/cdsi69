@@ -40,7 +40,7 @@ ajInterface
 
 'use strict';
 
-alert("06h12");
+alert("08h12");
 
 window.onerror = function(message, source, lineno, colno, erreur) {
 
