@@ -76,6 +76,14 @@ function enregistrerPhotoDansBDD(photo) {
                     NOM_MAGASIN_PHOTOS
                 );
 
+alert(
+    "ENREGISTREMENT PHOTO\n\n" +
+    "id = [" + photo.id + "]\n" +
+    "idBDD = [" + photo.idBDD + "]\n" +
+    "reference = [" + photo.reference + "]"
+);
+
+
             const requete =
                 magasin.put(photo);
 
