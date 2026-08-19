@@ -736,11 +736,18 @@ function ouvrirFenetreInitialisation() {
 const fenetre =
     document.getElementById("fenetreInitialisation");
 
-    alert(
-    "Parent : " +
-    fenetre.parentElement.id +
-    "\nParent display : " +
-    getComputedStyle(fenetre.parentElement).display
+
+const elementCentre =
+    document.elementFromPoint(
+        window.innerWidth / 2,
+        window.innerHeight / 2
+    );
+
+alert(
+    "Élément au centre : " +
+    elementCentre.id +
+    "\nClasse : " +
+    elementCentre.className
 );
 
 
