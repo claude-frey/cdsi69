@@ -484,6 +484,8 @@ alert(
 
 lien.click();
 
+alert("Clic sur le lien de téléchargement exécuté.");
+
 document.body.removeChild(lien);
 
 setTimeout(function() {
