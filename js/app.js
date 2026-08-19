@@ -745,7 +745,14 @@ alert(
     fenetre.parentElement.id
 );
 
-
+alert(
+    "pointer-events : " +
+    getComputedStyle(fenetre).pointerEvents +
+    "\nvisibility : " +
+    getComputedStyle(fenetre).visibility +
+    "\nopacity : " +
+    getComputedStyle(fenetre).opacity
+);
 
 const elementCentre =
     document.elementFromPoint(
