@@ -40,7 +40,7 @@ ajInterface
 
 'use strict';
 
-alert("18h17");
+alert("04h07");
 
 window.onerror = function(message, source, lineno, colno, erreur) {
 
@@ -717,8 +717,6 @@ function reinitialiserInterface() {
 function ouvrirFenetreInitialisation() {
 
     
-   
-
     if (modeGPX.checked) {
 
         document.getElementById("nomCollecteInitial").value =
@@ -738,24 +736,13 @@ function ouvrirFenetreInitialisation() {
 const fenetre =
     document.getElementById("fenetreInitialisation");
 
-alert(
-    "Parent : " +
-    fenetre.parentElement.id +
-    "\nParent display : " +
-    getComputedStyle(fenetre.parentElement).display
-);
-
-
-alert("Élément trouvé : " + (fenetre !== null));
 
 fenetre.classList.remove("cache");
 
-alert("Classe retirée");
 
 fenetre.style.background = "red";
 
 alert("Fond rouge appliqué");
-
 
 }
 
