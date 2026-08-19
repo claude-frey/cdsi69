@@ -736,6 +736,15 @@ function ouvrirFenetreInitialisation() {
 const fenetre =
     document.getElementById("fenetreInitialisation");
 
+    alert(
+    "width CSS : " +
+    getComputedStyle(fenetre).width +
+    "\nheight CSS : " +
+    getComputedStyle(fenetre).height +
+    "\ninset : " +
+    getComputedStyle(fenetre).inset
+);
+
     const rect = fenetre.getBoundingClientRect();
 
 alert(
