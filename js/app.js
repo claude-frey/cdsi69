@@ -736,6 +736,16 @@ function ouvrirFenetreInitialisation() {
 const fenetre =
     document.getElementById("fenetreInitialisation");
 
+    const rect = fenetre.getBoundingClientRect();
+
+alert(
+    "Fenêtre : " +
+    "\nleft = " + rect.left +
+    "\ntop = " + rect.top +
+    "\nwidth = " + rect.width +
+    "\nheight = " + rect.height
+);
+
 alert(
     "z-index fenêtre : " +
     getComputedStyle(fenetre).zIndex +
