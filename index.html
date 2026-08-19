@@ -629,98 +629,104 @@
 
         <div id="resumeRepriseArchivee"></div>
 
-        <div class="modal-boutons">
+            <div class="modal-boutons">
 
-            <button id="btnReprendreArchivee"
-                onclick="reprendreCollecteArchivee()">
-                ▶ Reprendre
+                    <button id="btnReprendreArchivee"
+                        onclick="reprendreCollecteArchivee()">
+                        ▶ Reprendre
+                    </button>
+
+                    <button id="btnAnnulerRepriseArchivee"
+                        onclick="annulerRepriseArchivee()">
+                        Annuler
+                    </button>
+
+            </div>
+
+           </div>
+
+</div>  
+
+            <div id="menuPhotos" class="cache">
+
+                <div class="contenuMenuPhotos">
+
+                    <h3>Photos</h3>
+
+                    <button id="btnAjouterPhoto">
+                        📸 Ajouter une photo
+                    </button>
+
+                    <button id="btnVoirPhotos">
+                        🖼 Voir les photos
+                    </button>
+
+                
+                    <button id="btnFermerMenuPhotos">
+                        Fermer
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+    <div id="versionCDSI"></div>
+
+    <div id="visionneusePhotos">
+
+        <div class="contenuVisionneuse">
+
+            <img id="imagePhoto" src="" alt="Photo du waypoint">
+
+            <h2 id="referencePhoto">XXXXXXXX</h2>
+
+            <label for="commentairePhoto">
+                Commentaire
+            </label>
+
+            <textarea
+                id="commentairePhoto"
+                rows="3"
+                placeholder="Décrivez cette photo...">
+            </textarea>
+
+            <button id="btnEnregistrerCommentairePhoto">
+                💾 Enregistrer
             </button>
 
-            <button id="btnAnnulerRepriseArchivee"
-                onclick="annulerRepriseArchivee()">
-                Annuler
+            <p id="messageCommentaire" class="messageCache">
+                ✅ Commentaire enregistré
+            </p>
+
+            <div id="navigationPhotos">
+
+                    <button id="btnPhotoPrecedente">
+                    ◀
+                    </button>
+
+                    <span id="compteurPhotos">
+                        1 / 1
+                    </span>
+
+                    <button id="btnPhotoSuivante">
+                        ▶
+                    </button>
+
+            </div>
+
+            <button id="btnSupprimerPhotoVisionneuse">
+                🗑 Supprimer
+            </button>
+
+            <button id="btnFermerVisionneuse">
+                Fermer
             </button>
 
         </div>
 
-<div id="menuPhotos" class="cache">
-
-    <div class="contenuMenuPhotos">
-
-        <h3>Photos</h3>
-
-        <button id="btnAjouterPhoto">
-            📸 Ajouter une photo
-        </button>
-
-        <button id="btnVoirPhotos">
-            🖼 Voir les photos
-        </button>
-
-       
-        <button id="btnFermerMenuPhotos">
-            Fermer
-        </button>
-
     </div>
-
-</div>
-
-<div id="versionCDSI"></div>
-
-<div id="visionneusePhotos">
-
-    <div class="contenuVisionneuse">
-
-        <img id="imagePhoto" src="" alt="Photo du waypoint">
-
-        <h2 id="referencePhoto">XXXXXXXX</h2>
-
-        <label for="commentairePhoto">
-            Commentaire
-        </label>
-
-        <textarea
-            id="commentairePhoto"
-            rows="3"
-            placeholder="Décrivez cette photo...">
-        </textarea>
-
-        <button id="btnEnregistrerCommentairePhoto">
-            💾 Enregistrer
-        </button>
-
-        <p id="messageCommentaire" class="messageCache">
-            ✅ Commentaire enregistré
-        </p>
-
-        <div id="navigationPhotos">
-
-                <button id="btnPhotoPrecedente">
-                ◀
-                </button>
-
-                <span id="compteurPhotos">
-                    1 / 1
-                </span>
-
-                <button id="btnPhotoSuivante">
-                    ▶
-                </button>
-
-        </div>
-
-        <button id="btnSupprimerPhotoVisionneuse">
-            🗑 Supprimer
-        </button>
-
-        <button id="btnFermerVisionneuse">
-            Fermer
-        </button>
-
-    </div>
-
-</div>
 <div id="dialogCommentairePhoto" class="cache">
 
     <div class="contenuDialogue">
