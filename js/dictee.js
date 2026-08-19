@@ -247,6 +247,10 @@ document
         }
     );
 
+  // =====================================================
+    // FIN DU FICHIER LIGNE 263 soit 12 lignes plus bas
+    // =====================================================
+
     document
     .getElementById("btnDicteePhoto")
     .addEventListener(
@@ -257,4 +261,3 @@ document
 
         }
     );
-  // FIN CORRECTE//
