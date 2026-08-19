@@ -1,4 +1,4 @@
-//18h10
+
 
 function dicterTexte(idChamp) {
 
@@ -257,4 +257,4 @@ document
 
         }
     );
-  
+  // FIN CORRECTE//
