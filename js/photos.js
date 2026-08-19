@@ -87,11 +87,16 @@ alert(
             const requete =
                 magasin.put(photo);
 
-            requete.onsuccess = function() {
+          requete.onsuccess = function() {
 
-                resolve();
+    alert(
+        "Photo enregistrée dans IndexedDB : " +
+        photo.id
+    );
 
-            };
+    resolve();
+
+};
 
             requete.onerror = function() {
 
