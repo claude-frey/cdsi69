@@ -1455,6 +1455,11 @@ input[type=text] {
     cursor: pointer;
 
 }
+
+#btnOuvrirCollecte small {
+    color: #777;
+}
+
 #btnOuvrirCollecte:hover {
 
     background: #f4f8fb;
