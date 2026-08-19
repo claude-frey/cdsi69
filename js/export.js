@@ -477,6 +477,11 @@ lien.style.display = "none";
 
 document.body.appendChild(lien);
 
+alert(
+    "Téléchargement du ZIP\n\n" +
+    "Nom : " + lien.download
+);
+
 lien.click();
 
 document.body.removeChild(lien);
