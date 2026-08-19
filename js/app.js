@@ -40,7 +40,7 @@ ajInterface
 
 'use strict';
 
-alert("04h07");
+alert("06h12");
 
 window.onerror = function(message, source, lineno, colno, erreur) {
 
@@ -716,7 +716,6 @@ function reinitialiserInterface() {
 
 function ouvrirFenetreInitialisation() {
 
-    
     if (modeGPX.checked) {
 
         document.getElementById("nomCollecteInitial").value =
@@ -727,98 +726,16 @@ function ouvrirFenetreInitialisation() {
         document.getElementById("nomCollecteInitial").value =
             nomTrace.value.trim();
 
-        
-
     }
 
- document.getElementById("vitesseMoyenne").value = 3.5;
+    document.getElementById("vitesseMoyenne").value = 3.5;
 
-const fenetre =
-    document.getElementById("fenetreInitialisation");
-
-    alert(
-    "Parent : " +
-    fenetre.parentElement.tagName +
-    "\nID : " +
-    fenetre.parentElement.id +
-    "\nClasse : " +
-    fenetre.parentElement.className
-);
-
-    alert(
-    "BODY : " +
-    (fenetre.parentElement === document.body) +
-    "\nHTML : " +
-    fenetre.outerHTML.substring(0, 100)
-);
-
-alert(
-    "Nombre de fenetres : " +
-    document.querySelectorAll("#fenetreInitialisation").length
-);
-
-    alert(
-    "width CSS : " +
-    getComputedStyle(fenetre).width +
-    "\nheight CSS : " +
-    getComputedStyle(fenetre).height +
-    "\ninset : " +
-    getComputedStyle(fenetre).inset
-);
-
-    const rect = fenetre.getBoundingClientRect();
-
-alert(
-    "Fenêtre : " +
-    "\nleft = " + rect.left +
-    "\ntop = " + rect.top +
-    "\nwidth = " + rect.width +
-    "\nheight = " + rect.height
-);
-
-alert(
-    "z-index fenêtre : " +
-    getComputedStyle(fenetre).zIndex +
-    "\nposition : " +
-    getComputedStyle(fenetre).position +
-    "\nparent : " +
-    fenetre.parentElement.id
-);
-
-alert(
-    "pointer-events : " +
-    getComputedStyle(fenetre).pointerEvents +
-    "\nvisibility : " +
-    getComputedStyle(fenetre).visibility +
-    "\nopacity : " +
-    getComputedStyle(fenetre).opacity
-);
-
-const elementCentre =
-    document.elementFromPoint(
-        window.innerWidth / 2,
-        window.innerHeight / 2
-    );
-
-alert(
-    "Élément au centre : " +
-    elementCentre.id +
-    "\nClasse : " +
-    elementCentre.className
-);
-
-
-fenetre.classList.remove("cache");
-
-
-fenetre.style.background = "red";
-fenetre.style.width = "100vw";
-fenetre.style.height = "100vh";
-
-
-alert("Fond rouge appliqué");
+    document
+        .getElementById("fenetreInitialisation")
+        .classList.remove("cache");
 
 }
+
 
 function fermerFenetreInitialisation() {
 
