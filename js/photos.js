@@ -118,6 +118,8 @@ function enregistrerPhotoDansBDD(photo) {
                     NOM_MAGASIN_PHOTOS
                 );
 
+alert("ID photo demandé : [" + id + "]");
+
             const requete =
                 magasin.get(id);
 
