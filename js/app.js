@@ -736,6 +736,13 @@ function ouvrirFenetreInitialisation() {
 const fenetre =
     document.getElementById("fenetreInitialisation");
 
+    alert(
+    "Parent : " +
+    fenetre.parentElement.id +
+    "\nParent display : " +
+    getComputedStyle(fenetre.parentElement).display
+);
+
 
 fenetre.classList.remove("cache");
 
