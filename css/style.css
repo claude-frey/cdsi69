@@ -1625,3 +1625,6 @@ input[type=text] {
 #fenetreInitialisation .champEnLigne input {
     flex: 1;
 }
+html {
+    scroll-behavior: smooth;
+}
