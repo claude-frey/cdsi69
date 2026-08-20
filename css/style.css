@@ -1654,3 +1654,17 @@ html {
     margin-right: 8px;
 
 }
+
+#titreAccueil .logoTitre {
+
+    width: 45px !important;
+
+    height: 45px !important;
+
+    vertical-align: middle;
+
+    margin-right: 8px;
+
+    object-fit: contain;
+
+}
