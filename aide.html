@@ -90,7 +90,8 @@ Au démarrage de CDSI69, trois possibilités vous sont proposées.
 <strong>Suivre un circuit existant</strong><br>
 Choisissez cette option lorsque vous disposez déjà d'une trace au format GPX.
 Vous pourrez sélectionner le fichier GPX du circuit, puis effectuer la
-collecte en suivant cette trace.
+collecte en suivant cette trace. L'application vous indiquera alors en permanence 
+votre écart géographique par rapport à cette trace.
 </p>
 
 <p>
@@ -427,12 +428,12 @@ contenant la trace, les informations relevées aux différents waypoints,
 les photos et les fichiers nécessaires à son exploitation ultérieure.
 </p>
 
-    <button
-        class="boutonFermer"
-        onclick="window.close()">
+  <button
+    class="boutonFermer"
+    onclick="history.back()">
 
-        Fermer
-            </button>
+    Fermer
+</button>
 
 </body>
 
