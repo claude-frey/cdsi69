@@ -1184,21 +1184,15 @@ input[type=text] {
 
 #nouveauCommentairePhoto {
     width: 90%;
-
     min-height: 70px;
-
     margin: 10px auto;
-
     display: block;
-
     box-sizing: border-box;
-
     font-size: 1.05em;
-
     padding: 8px;
 
+    border: 1px solid #cfd8dc;
     border-radius: 8px;
-
 }
 
 
