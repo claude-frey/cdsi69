@@ -443,52 +443,8 @@ const contenuZipFinal = new Blob(
     }
 );
 
+return contenuZipFinal;
 
-// =============================================
-// Téléchargement du ZIP unique
-// =============================================
-
-const url =
-    URL.createObjectURL(contenuZipFinal);
-
-const lien =
-    document.createElement("a");
-
-lien.href = url;
-
-lien.download =
-    collecte.nomCollecte + ".zip";
-
-lien.style.display = "none";
-
-document.body.appendChild(lien);
-
-
-
-lien.click();
-
-
-
-document.body.removeChild(lien);
-
-setTimeout(function() {
-
-    URL.revokeObjectURL(url);
-
-}, 1000);
-
-
-        console.log(
-            "CDSI69 : ZIP complet créé."
-        );
-
-        console.log(
-            "CDSI69 : " +
-            nombrePhotos +
-            " photo(s) ajoutée(s)."
-        );
-
-        return true;
 
     } catch (erreur) {
 

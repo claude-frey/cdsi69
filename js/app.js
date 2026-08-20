@@ -783,14 +783,14 @@ async function archiverCollecte() {
     // Création et export du ZIP unique
     // =============================================
 
-    const succes =
-        await exporterCollecteZIP(collecte);
+   const contenuZip =
+    await exporterCollecteZIP(collecte);
 
     // =============================================
     // Si le ZIP n'a pas pu être créé
     // =============================================
 
-    if (!succes) {
+   if (!contenuZip) {
 
         alert(
             "⚠️ La collecte n'a pas été supprimée.\n\n" +
@@ -805,9 +805,7 @@ async function archiverCollecte() {
     // ZIP créé : collecte terminée
     // =============================================
 
-    await new Promise(function(resolve) {
-        setTimeout(resolve, 1500);
-    });
+    
 
 
     alert(
@@ -826,6 +824,36 @@ async function archiverCollecte() {
     // =============================================
     // Nettoyage après réussite
     // =============================================
+// =============================================
+// Téléchargement du ZIP
+// =============================================
+
+const url =
+    URL.createObjectURL(contenuZip);
+
+const lien =
+    document.createElement("a");
+
+lien.href = url;
+
+lien.download =
+    collecte.nomCollecte + ".zip";
+
+lien.style.display = "none";
+
+document.body.appendChild(lien);
+
+lien.click();
+
+document.body.removeChild(lien);
+
+setTimeout(function() {
+
+    URL.revokeObjectURL(url);
+
+}, 1000);
+
+
 
     nettoyerCollecteInterrompue();
 
