@@ -1597,6 +1597,7 @@ input[type=text] {
     box-sizing: border-box;
 
 }
+
 .btnAide {
     border-radius: 8px;
 }
@@ -1631,12 +1632,22 @@ html {
 
 .logoCDSI69 {
 
-    display: block;
+    width: 50px;
 
-    width: 100px;
+    height: 50px;
 
-    height: 100px;
+    object-fit: contain;
 
-    margin: 0 auto 10px auto;
+}
 
-} 
+#boutonsAccueil {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+
+}
