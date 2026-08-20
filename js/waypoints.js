@@ -285,8 +285,8 @@ remplirChamp("pasAPas", "");
 
 document.getElementById("overlay").style.display = "block";
 document.getElementById("ficheWP").style.display = "block";
-
-
+document.getElementById("ficheWP").scrollTop = 0;
+window.scrollTo(0, 0);
 
 
 
@@ -448,6 +448,8 @@ if (waypointCourant.photos.length > 0) {
         enregistrerPhotoDansBDD({
 
             id: photo.idBDD,
+
+           /*  idBDD: photo.idBDD, */
 
             reference: photo.reference,
 
@@ -886,10 +888,6 @@ function ouvrirWaypoint(wp) {
     document.getElementById("signaletiqueAutre").value =
 wp.signaletiqueAutre || "";
 
-alert(
-    "PK = " + wp.pk +
-    "\nEntre = " + wp.entrePas
-);
 
   document.getElementById("pk").textContent =
     wp.pk;
