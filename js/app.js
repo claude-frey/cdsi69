@@ -47,7 +47,7 @@ window.onerror = function(message, source, lineno, colno, erreur) {
     
 };
 
-const VERSION_CDSI = "V2.13.0-dev01 30 07 11h32";
+const VERSION_CDSI = "V2.14.0-dev20 08 2026 07h02";
 
 //document.getElementById("versionCDSI").textContent =
 //    "CDSI69 " + VERSION_CDSI;
@@ -804,6 +804,11 @@ async function archiverCollecte() {
     // =============================================
     // ZIP créé : collecte terminée
     // =============================================
+
+    await new Promise(function(resolve) {
+        setTimeout(resolve, 1500);
+    });
+
 
     alert(
         "✅ Cette collecte est terminée.\n\n" +
