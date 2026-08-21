@@ -1,5 +1,5 @@
 
-
+//CDSI69 - Version 2.14//
 function dicterTexte(idChamp) {
 
     const champ = document.getElementById(idChamp);
