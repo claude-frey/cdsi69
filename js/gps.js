@@ -245,15 +245,29 @@ if (suiviGPS) {
 
 if (altitudeGPS != null) {
 
+    let texteAltitude =
+        "⛰️ " +
+        Math.round(altitudeGPS) +
+        " m";
+
+    if (altitudePrecisionGPS != null) {
+
+        texteAltitude +=
+            " ± " +
+            Math.round(altitudePrecisionGPS) +
+            " m";
+
+    }
+
     tdbAltitude.textContent =
-        "⛰️ " + Math.round(altitudeGPS) + " m";
+        texteAltitude;
 
 } else {
 
     tdbAltitude.textContent =
         "⛰️ ---";
 
-}    
+}  
 
                 // ----- Etat du GPS -----
 
