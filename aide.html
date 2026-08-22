@@ -67,6 +67,7 @@
     - un fichier .cdsi69 qui contiendra toutes les données de la collecte permettant de repartir pour éventuellement reprendre et prolonger cette collecte.<br>
     - et un sous-dossier "Photos" comprenant toutes les photos prises à partir d'un waypoint avec leurs commentaires et l'indication du waypoint auquel elles
       sont rattachées.<br>
+    - Prévoir une batterie additionnelle ne sera pas un luxe inutile.
     </p>
 <center> ___________________________</center>
 <h2>Sommaire</h2>
@@ -107,7 +108,7 @@ de votre progression.
 
 <p>
 <strong>Reprendre une collecte</strong><br>
-Cette option permet de reprendre une collecte qui a été interrompue.
+Cette option permet de reprendre une collecte qui a été interrompue volontairement.
 Sélectionnez le fichier <strong>.cdsi69</strong> ou le fichier
 <strong>.zip</strong> correspondant à la collecte à reprendre.
 </p>
@@ -116,14 +117,10 @@ Sélectionnez le fichier <strong>.cdsi69</strong> ou le fichier
 
 <h2 id="preparer"><u>2. Préparer et démarrer la collecte</u></h2>
 
-<p>
-Après avoir choisi le mode de collecte, renseignez les informations demandées
-et vérifiez que la préparation est correctement effectuée.
-</p>
 
 <p>
 Lorsque vous suivez un circuit existant, sélectionnez le fichier GPX
-correspondant au parcours.
+correspondant au parcours. La trace de celui-ci ne servira qu'à vous guider et n'aura aucun autre rôle dans la collecte.
 </p>
 
 <p>
@@ -131,9 +128,20 @@ Lorsque vous créez une nouvelle trace, donnez un nom à cette trace.
 </p>
 
 <p>
+Après avoir choisi le fichier GPX à suivre ou avoir donné un nom à la nouvelle trace que vous allez créer,
+L'écran suivant vous permet de remplir la partie "adminstrative" de votre collecte
+La saisie du nom des collecteurs est obligatoire. Ils ne sont pas saisissables par la dictée
+en raison de la complexité des orthographes possibles.
+La vitesse horaire de marche proposée est de 3,5 km/h pour le randonneur qui utilisera par la suite ce circuit. 
+Elle permettra à l'application de calculer le temps de marche.Cette vitesse est modifiable.
+</p>
+<p>
 Avant de commencer, attendez que le téléphone ait obtenu une position GPS.
 Une fois la collecte commencée, CDSI69 enregistre votre progression et permet
 de créer des waypoints aux endroits où vous souhaitez relever des informations.
+La fenêtre de la carte vous affiche en haut le nom de la collecte, le nombre de waypoints effectués,
+la distance parcourue par le collecteur, s'il s'agit d'une collecte en suivant un .GPX l'écart entre votre position
+et ce GPX, un bouton changeant de couleur en fonction de la puissance du signal GPS, l'altitude et enfin le pourcentage de batterie encore disponible.
 </p>
 
 <h2 id="waypoint"><u>3. Créer et renseigner un waypoint</u></h2>
@@ -141,12 +149,8 @@ de créer des waypoints aux endroits où vous souhaitez relever des informations
 <p>
 Au cours de la collecte, créez un waypoint chaque fois qu'une information
 doit être relevée sur le terrain, par exemple lors d'un changement de
-cheminement, de balisage ou de signalétique.
-</p>
-
-<p>
-Lorsque vous ouvrez un waypoint, une fiche permet de renseigner les différentes
-informations observées à cet endroit.
+cheminement, de balisage ou de signalétique.<br>
+Il est important de créer un waypoint à chaque changement de revêtement ou d'entrée et sortie d'agglo pour le calcul des cumuls.
 </p>
 
 <p>
@@ -164,6 +168,10 @@ d'agglomération.
 <p>
 <strong>Cheminement</strong><br>
 Indiquez la nature du chemin : revêtu ou non revêtu.
+</p>
+
+<p><strong>Ces deux dernières indications sont à renseigner avec soin car le calcul des portions en agglo ou hors agglo 
+ainsi que celui du revêtu ou non revêtu se font à partir d'elles.</strong>
 </p>
 
 <p>
@@ -197,12 +205,6 @@ rencontrés sur le parcours.
 <strong>Pas à pas</strong><br>
 Utilisez cette zone pour noter toute indication utile permettant de décrire
 précisément le parcours.
-</p>
-
-<p>
-<strong>PK et distance entre les points</strong><br>
-Ces informations sont calculées automatiquement par CDSI69 à partir de la
-progression sur le parcours.
 </p>
 
 <p>
@@ -241,22 +243,22 @@ ce qu'elle représente ou la raison pour laquelle elle a été prise.
 </p>
 
 <p>
-Les photos associées à un waypoint peuvent ensuite être consultées depuis
+Les photos associées à un waypoint peuvent ensuite être consultées ou modifiées depuis
 la fiche de ce waypoint.
 </p>
 
 <p>
 Lors de l'archivage final de la collecte, les photos sont enregistrées dans
 le dossier <strong>Photos</strong> du fichier ZIP. Chaque photo est accompagnée
-de son descriptif.
+de son descriptif (texte de description et numéro du waypoint auquel elle est associée et son numéro dans la liste des photos de ce waypoint.).
 </p>
 
 
 <h2 id="dictee"><u>5. Utiliser la dictée vocale</u></h2>
 
 <p>
-Pour faciliter la saisie sur le terrain, certains champs peuvent être
-renseignés à l'aide de la dictée vocale.
+Pour faciliter la saisie sur le terrain, la totalité des champs peut être
+renseignée à l'aide de la dictée vocale, hormis le nom des collecteurs.
 </p>
 
 <p>
@@ -278,7 +280,7 @@ les noms de lieux ou les termes particuliers.
 
 <p>
 La dictée vocale dépend des possibilités du téléphone et du navigateur
-utilisé. Si elle n'est pas disponible, le texte peut naturellement être
+utilisé. Si elle n'est pas disponible, le texte peut toujours être
 saisi au clavier.
 </p>
 
@@ -308,8 +310,8 @@ Vous pouvez ensuite poursuivre normalement votre travail.
 <p>
 Cas particulier d'une collecte interrompue accidentellement (panne de batterie, par exemple) :
 L'application effectue en permanence une sauvegarde des données. Donc si la collecte s'arrête sans 
-avoir été menée jusqu'à la fin du processus normal, lors de la reprise CDSI69 vous proposera automatiquement
-de reprendre cette collecte. Vous pourrez alors soit la reprendre immédiatement, soit plus tard ou enfin de 
+avoir été menée jusqu'à la fin du processus normal, lors de la réouverture de l'application, CDSI69 vous proposera automatiquement
+de reprendre cette collecte là où l'enregistrement s'est arrêté. <br>Vous pourrez alors soit continuer immédiatement, soit plus tard ou enfin de 
 la supprimer.
 </p>
 
@@ -317,8 +319,8 @@ la supprimer.
 
 <p>
 Lorsque la collecte est terminée et que tous les waypoints ont été
-vérifiés, utilisez la fonction permettant de terminer et d'archiver
-la collecte.
+vérifiés, utilisez le bouton permettant de terminer et d'archiver
+la collecte. En cas d'appui involontaire sur ce bouton, vous pourrez revenir à la collecte.
 </p>
 
 <p>
@@ -335,8 +337,8 @@ Ce fichier contient :
 <strong>.cdsi69</strong> ;<br>
 • le fichier <strong>Excel</strong> contenant les informations
 collectées ;<br>
-• le fichier <strong>GPX enrichi</strong> ;<br>
-• les photos dans un dossier nommé <strong>Photos</strong>.
+• le fichier <strong>GPX enrichi des données des waypoints </strong> ;<br>
+• les photos dans un dossier nommé <strong>Photos</strong> .
 </p>
 
 <p>
@@ -370,13 +372,7 @@ carte et de l'appareil photo peut augmenter la consommation de batterie.
 
 <p>
 Avant de commencer la collecte, vérifiez que le GPS fonctionne correctement
-et que votre position apparaît sur la carte.
-</p>
-
-<p>
-Si vous utilisez un circuit existant, vérifiez également que le bon fichier
-GPX a été sélectionné et que la trace correspond bien à l'itinéraire à
-collecter.
+et que votre position apparaît sur la carte, ainsi que d'avoir suffisament de batterie.
 </p>
 
 <p>
