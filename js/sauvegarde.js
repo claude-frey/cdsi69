@@ -111,6 +111,27 @@ function restaurerCollecte(collecte) {
     traceParcourue = collecte.traceParcourue;
     contenuGPX = collecte.contenuGPX;
 
+    if (contenuGPX) {
+
+    chargerTexteGPX(contenuGPX);
+
+}
+
+// ===== Restauration des waypoints =====
+
+waypoints = collecte.waypoints || [];
+
+    // ===== Mise à jour du tableau de bord =====
+
+document.getElementById("tdbCircuit").textContent =
+    nomCollecte || "-";
+
+document.getElementById("nbWaypoints").textContent =
+    waypoints.length;
+
+document.getElementById("tdbPK").textContent =
+    Math.round(distanceCollecte) + " m";
+
 if (contenuGPX) {
 
     chargerTexteGPX(contenuGPX);
