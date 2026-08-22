@@ -48,16 +48,15 @@ let longitudeGPS = null;
 let altitudeGPS = null;
 let altitudePrecisionGPS = null;
 let suiviGPS = null;
-
 let marqueurGPS = null;
-
 let traceMarcheur = null;
-
 let traceParcourue = [];
 let distanceTotale = 0;      // mètres réellement parcourus
 let dernierPointGPS = null;  // dernier point retenu
 let distanceCollecte = 0;
 let dernierPointCollecte = null;
+
+
 
 const DISTANCE_MINI = 3;      // seuil anti-jitter (mètres)
 
@@ -65,17 +64,18 @@ const DISTANCE_MINI = 3;      // seuil anti-jitter (mètres)
 function mettreAJourPositionGPS(latitude, longitude) {
     
 
-    if (marqueurGPS) {
+   if (marqueurGPS) {
 
-      marqueurGPS.setLatLng([latitude, longitude]);
-      
-      carte.panTo([latitude, longitude]);
+    marqueurGPS.setLatLng([latitude, longitude]);
 
-    } else {
+    if (!recentrageSuspendu) {
 
-    
+        carte.panTo([latitude, longitude]);
 
-    
+    }
+
+    } 
+    else {
 
         marqueurGPS = L.circleMarker(
             [latitude, longitude],

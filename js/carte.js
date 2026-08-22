@@ -49,6 +49,8 @@
 let carteInitialisee = false;
 let fondPlanIGN = null;
 let fondOSM = null;
+let recentrageSuspendu = false;
+let timerRecentrage = null;
 //-------------------------------------------------
 // ETAT DE LA CARTE
 //-------------------------------------------------
@@ -58,7 +60,24 @@ function initialiserCarte() {
 
     if (carteInitialisee) return;
 
-    carte = L.map('carte').setView([45.896,4.433],15); //passer de 15 à 16 ou 17 pour zoomer
+    carte = L.map('carte').setView(
+        [45.896, 4.433],
+        15 //passer à 16 ou 17 pour zoomer//
+    );
+
+    carte.on("movestart", function() {
+
+        recentrageSuspendu = true;
+
+        clearTimeout(timerRecentrage);
+
+        timerRecentrage = setTimeout(function() {
+
+            recentrageSuspendu = false;
+
+        }, 20000);
+
+    });
 
     groupeWaypoints = L.layerGroup().addTo(carte);
 
