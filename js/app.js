@@ -368,7 +368,7 @@ function demarrerCollecte() {
         if (nom === "") {
 
             alert(
-                "⚠️ Veuillez saisir un nom pour la nouvelle trace."
+                "⚠️ Veuillez saisir un nom dans la page d'accueil avant de démarrer la nouvelle trace."
             );
 
             return;
@@ -379,7 +379,7 @@ function demarrerCollecte() {
         if (!contenuGPX) {
 
             alert(
-                "⚠️ Veuillez choisir un circuit GPX avant de démarrer la collecte."
+                "⚠️ Veuillez choisir un circuit GPX dans la page d'accueil avant de démarrer la collecte."
             );
 
             return;
