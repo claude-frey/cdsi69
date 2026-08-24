@@ -597,13 +597,20 @@
 <button id="btnPhoto" type="button">
     📷 Ajouter une photo
 </button>
+
+
 <input
     type="file"
     id="photoWaypoint"
     accept="image/*"
     capture="environment"
     multiple
-    style="display:none">
+    style="
+        position:absolute;
+        left:-9999px;
+        width:1px;
+        height:1px;
+    ">
 
 <br><br>
 

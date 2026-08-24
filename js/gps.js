@@ -345,8 +345,7 @@ mettreAJourDistanceCollecte(
 
         },
 
-        function(erreur) {
-    alert("Erreur GPS : " + erreur.code);
+  
 
 
     
