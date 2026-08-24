@@ -505,10 +505,15 @@ if (waypointCourant.photos.length > 0) {
 
 function gererPhotoWaypoint() {
 
+    alert("Bouton photo bien reçu");
+
     if (
+        !waypointCourant ||
         !waypointCourant.photos ||
         waypointCourant.photos.length === 0
     ) {
+
+        alert("Ouverture de la caméra");
 
         document
             .getElementById("photoWaypoint")
@@ -518,12 +523,12 @@ function gererPhotoWaypoint() {
 
     }
 
+    alert("Affichage du menu des photos");
+
     document
-    .getElementById("menuPhotos")
-    .classList
-    .add("visible");
-
-
+        .getElementById("menuPhotos")
+        .classList
+        .add("visible");
 }
 
 
