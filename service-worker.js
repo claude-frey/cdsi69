@@ -1,7 +1,7 @@
 // CDSI69 - Service Worker
 // Version 1.0
 
-const CACHE_NAME = "cdsi69-v2-1";
+const CACHE_NAME = "cdsi69-v2-2";
 
 const FICHIERS_A_METTRE_EN_CACHE = [
 
@@ -107,41 +107,62 @@ self.addEventListener("fetch", function(event) {
     }
 
     event.respondWith(
-         caches.match(event.request)
 
-            .then(function(reponseCache) {
+        // On essaie d'abord le réseau
+        fetch(event.request)
 
-                if (reponseCache) {
+            .then(function(reponseReseau) {
 
-                    return reponseCache;
+                // Si la réponse est correcte,
+                // on met à jour le cache
+                if (reponseReseau && reponseReseau.ok) {
+
+                    const copieReponse =
+                        reponseReseau.clone();
+
+                    caches.open(CACHE_NAME)
+                        .then(function(cache) {
+
+                            cache.put(
+                                event.request,
+                                copieReponse
+                            );
+
+                        });
 
                 }
 
-                return fetch(event.request)
-
-                    .then(function(reponseReseau) {
-
-                        return reponseReseau;
-
-                    });
-
-            })
+                return reponseReseau;
+                           })
 
             .catch(function() {
 
-                // Si une page est demandée hors connexion,
-                // on renvoie la page principale de CDSI69.
+                // Pas de réseau :
+                // on utilise la version en cache
+                return caches.match(event.request)
 
-                if (
-                    event.request.mode === "navigate"
-                ) {
+                    .then(function(reponseCache) {
 
-                    return caches.match(
-                        "/index.html"
-                    );
+                        if (reponseCache) {
 
-                }
-                
+                            return reponseCache;
+
+                        }
+
+                        // Pour la navigation hors connexion,
+                        // retour à la page principale
+                        if (
+                            event.request.mode === "navigate"
+                        ) {
+
+                            return caches.match(
+                                "/index.html"
+                            );
+
+                        }
+
+                    });
+
             })
 
     );
