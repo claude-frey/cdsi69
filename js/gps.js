@@ -345,20 +345,22 @@ mettreAJourDistanceCollecte(
 
         },
 
-        function(erreur) {
-    alert("Erreur GPS : " + erreur.code);
+       function(erreur) {
 
+            console.log(
+                "Erreur GPS : " + erreur.code
+            );
 
-    
-},
+        },
 
-    {
-        enableHighAccuracy: true,
-        maximumAge: 0,
-        timeout: 100000
-    }
+        {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: 100000
+        }
 
-);
+    );
+
 }
 
 async function mettreAJourBatterie() {
