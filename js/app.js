@@ -354,8 +354,40 @@ if (informationsCollecte.vitesse <= 0) {
 
 function demarrerCollecte() {
 
+    // =============================================
+    // Vérification avant démarrage
+    // =============================================
 
-   collecteActive = true;
+    if (modeSansGPX.checked) {
+
+        const nom =
+            document.getElementById("nomTrace")
+                .value
+                .trim();
+
+        if (nom === "") {
+
+            alert(
+                "⚠️ Veuillez saisir un nom pour la nouvelle trace."
+            );
+
+            return;
+        }
+
+    } else {
+
+        if (!contenuGPX) {
+
+            alert(
+                "⚠️ Veuillez choisir un circuit GPX avant de démarrer la collecte."
+            );
+
+            return;
+        }
+
+    }
+
+    collecteActive = true;
     
 
 
