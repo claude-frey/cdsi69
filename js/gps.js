@@ -345,11 +345,7 @@ mettreAJourDistanceCollecte(
 
         },
 
-  
 
-
-    
-}
 
     {
         enableHighAccuracy: true,
