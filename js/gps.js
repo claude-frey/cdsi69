@@ -349,7 +349,7 @@ mettreAJourDistanceCollecte(
 
 
     
-},
+}
 
     {
         enableHighAccuracy: true,
