@@ -1609,6 +1609,4 @@ function restaurerWaypoint(wp) {
 
     }
 
-    waypoints.push(wp);
-
 }

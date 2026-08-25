@@ -69,6 +69,21 @@ function construireObjetCollecte() {
 
     };
 
+alert(
+    "Waypoints dans la collecte : " +
+    collecte.waypoints.length +
+    "\n\n" +
+    collecte.waypoints.map(function(wp) {
+        return "WP " +
+            wp.numero +
+            " — PK : " +
+            wp.pk +
+            " — Entre-pas : " +
+            wp.entrePas;
+    }).join("\n")
+);
+
+
     return collecte;
 
 }
