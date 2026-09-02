@@ -1,17 +1,16 @@
 /*
     CDSI69
-    Version : 2.11
+    Version : 2.14 - août 2026
     Fichier : package.json
 
     Auteurs :
         Claude Frey
+        &
         OpenAI ChatGPT
 
-    Rôle :
-        Interface principale de l'application.
-
-    Architecture V2.11
-
+    
+    Architecture :
+        aide.html 
         index.html
         manifest.json
         package.json
@@ -24,18 +23,40 @@
             |__js
                 +__app.js
                 +__carte.js
+                +__debug.js
+                +__dictee.js
+                +__export.js
+                +__export_GPX.js
                 +__gps.js
                 +__gpx.js
+                +__jszip.min.js
+                +__leaflet.js
+                +__leaflet-omnivore.js
+                +__photos.js
+                +__sauvegarde.js
                 +__waypoints.js
+                +__xlsx.bundle.js
+                +__xlsx.full.min.js
             |__css
+                +leaflet.css
                 +__style.js
+            |__dist
+                |__assets
+                |__images
+                |__js
+                +__index.html
             |__Documents
                 +__CDSI69_Carnet_d_architecture_v1
             |__icones
+                +__icon-50.png
+                +__icon-125.png
                 +__icon-192.png
-                +__icin-512.png
+                +__icon-512.png
             |__images
             |__node_modules
+            |__public
+                |__images
+                |__js 
 */
 'use strict';
 
@@ -107,6 +128,8 @@ function remplirChamp(id, valeur) {
 function ajouterWaypoint(latitude, longitude) {
 
     indexWaypointCourant = -1;
+    
+    document.getElementById("btnPhoto").textContent = "📷 Ajouter une photo";
 
     const latlng = L.latLng(latitude, longitude);
     const modeSansGPX = (pointsTrace.length === 0);
