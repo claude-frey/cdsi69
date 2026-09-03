@@ -69,7 +69,8 @@ function construireObjetCollecte() {
 
     };
 
-alert(
+/*
+    alert(
     "Waypoints dans la collecte : " +
     collecte.waypoints.length +
     "\n\n" +
@@ -82,7 +83,7 @@ alert(
             wp.entrePas;
     }).join("\n")
 );
-
+*/
 
     return collecte;
 
