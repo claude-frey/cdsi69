@@ -81,18 +81,48 @@ let indexPhoto = 0;
 
 function nouveauPointDeReleve() {
 
+    // Vérifier que nous avons une position GPS
     if (latitudeGPS == null || longitudeGPS == null) {
 
+        alert("En attente d'une position GPS...");
+
+        return;
+    }
+
+    // Vérifier que la position GPS est récente
+    const agePosition =
+        horodatagePositionGPS === null
+            ? Infinity
+            : Date.now() - horodatagePositionGPS;
+
+    if (!Number.isFinite(agePosition) || agePosition > 30000) {
+
         alert(
-            "En attente d'une position GPS précise..."
+            "⚠️ La position GPS n'a pas été actualisée depuis plus de 30 secondes.\n\n" +
+            "Attendez que le GPS retrouve une position récente avant de créer ce waypoint."
         );
 
         return;
-
     }
 
-   
+    // Vérifier la précision GPS
+    const precision = Number(precisionPositionGPS);
 
+    if (
+        precisionPositionGPS == null ||
+        !Number.isFinite(precision) ||
+        precision > 50
+    ) {
+
+        alert(
+            "⚠️ La précision GPS est insuffisante.\n\n" +
+            "Attendez que le GPS fournisse une meilleure position avant de créer ce waypoint."
+        );
+
+        return;
+    }
+
+    // Les contrôles sont satisfaisants : créer le waypoint
     ajouterWaypoint(
         latitudeGPS,
         longitudeGPS
@@ -1056,30 +1086,40 @@ if (indexWaypointCourant === -1) {
 
 
 waypoints.sort(
-    (a, b) => Number(a.pk) - Number(b.pk)
+    (a, b) => Number(a.numero) - Number(b.numero)
 );
 
-waypoints.forEach(
-    function(wp, index) {
+waypoints.forEach(function(wp, index) {
 
-        if (index === 0) {
-
-            wp.entrePas = 0;
-
-        } else {
-
-            wp.entrePas =
-                Number(wp.pk)
-                -
-                Number(
-                    waypoints[index - 1].pk
-                );
-
-        }
-
+    if (index === 0) {
+        wp.entrePas = 0;
+        return;
     }
-);
 
+    const precedent = waypoints[index - 1];
+
+    const pkCourant = Number(wp.pk);
+    const pkPrecedent = Number(precedent.pk);
+
+    if (
+        wp.pk === null ||
+        wp.pk === undefined ||
+        String(wp.pk).trim() === "" ||
+        precedent.pk === null ||
+        precedent.pk === undefined ||
+        String(precedent.pk).trim() === "" ||
+        !Number.isFinite(pkCourant) ||
+        !Number.isFinite(pkPrecedent)
+    ) {
+        wp.entrePas = "";
+        return;
+    }
+
+    wp.entrePas = Math.abs(
+        pkCourant - pkPrecedent
+    );
+
+});
 
 groupeWaypoints.getLayers().forEach(
     m => console.log(m.numeroWP)
@@ -1507,9 +1547,9 @@ if (waypointCourant.marqueur) {
 
 
 
-        waypoints.sort(
-            (a, b) => Number(a.pk) - Number(b.pk)
-        );
+      waypoints.sort(
+    (a, b) => Number(a.numero) - Number(b.numero)
+);
 
 
 groupeWaypoints.getLayers().forEach(

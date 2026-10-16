@@ -997,11 +997,24 @@ function calculerStatistiquesCollecte(collecte) {
         const wpCourant = waypoints[i];
         const wpSuivant = waypoints[i + 1];
 
-        const distance =
-            Math.abs(
-                Number(wpSuivant.pk) -
-                Number(wpCourant.pk)
-            );
+        const pkCourant = Number(wpCourant.pk);
+        const pkSuivant = Number(wpSuivant.pk);
+
+        // Ignorer un segment si l'un des deux PK est absent ou invalide
+        if (
+            wpCourant.pk === null ||
+            wpCourant.pk === undefined ||
+            String(wpCourant.pk).trim() === "" ||
+            wpSuivant.pk === null ||
+            wpSuivant.pk === undefined ||
+            String(wpSuivant.pk).trim() === "" ||
+            !Number.isFinite(pkCourant) ||
+            !Number.isFinite(pkSuivant)
+        ) {
+            continue;
+        }
+
+        const distance = Math.abs(pkSuivant - pkCourant);
 
         if (wpCourant.agglo === "H") {
             distanceHorsAgglo += distance;
@@ -1064,15 +1077,56 @@ function calculerStatistiquesCollecte(collecte) {
 
 function exporterExcel(collecte, pourZIP = false) {
 
-    const stats =
-    calculerStatistiquesCollecte(collecte);
-
- 
-
-  if (!collecte) {
+    if (!collecte) {
         alert("Aucune collecte à exporter.");
         return;
     }
+
+    if (!Array.isArray(collecte.waypoints)) {
+        alert("Les waypoints de cette collecte sont introuvables.");
+        return;
+    }
+
+    // Remettre les waypoints dans l'ordre de leur numéro
+    collecte.waypoints.sort(function(a, b) {
+        return Number(a.numero) - Number(b.numero);
+    });
+
+    // Recalculer la colonne "Entre deux"
+    collecte.waypoints.forEach(function(wp, index) {
+
+        if (index === 0) {
+            wp.entrePas = 0;
+            return;
+        }
+
+        const precedent = collecte.waypoints[index - 1];
+
+        const pkCourant = Number(wp.pk);
+        const pkPrecedent = Number(precedent.pk);
+
+        if (
+            wp.pk === null ||
+            wp.pk === undefined ||
+            String(wp.pk).trim() === "" ||
+            precedent.pk === null ||
+            precedent.pk === undefined ||
+            String(precedent.pk).trim() === "" ||
+            !Number.isFinite(pkCourant) ||
+            !Number.isFinite(pkPrecedent)
+        ) {
+            wp.entrePas = "";
+            return;
+        }
+
+        wp.entrePas = Math.abs(
+            pkCourant - pkPrecedent
+        );
+
+    });
+
+    // Calculer les statistiques après la remise en ordre
+    const stats = calculerStatistiquesCollecte(collecte);
 
 
     // Création du classeur

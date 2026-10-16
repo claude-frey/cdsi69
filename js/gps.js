@@ -45,6 +45,8 @@
 
 let latitudeGPS = null;
 let longitudeGPS = null;
+let horodatagePositionGPS = null;
+let precisionPositionGPS = null;
 let altitudeGPS = null;
 let altitudePrecisionGPS = null;
 let suiviGPS = null;
@@ -177,7 +179,11 @@ function afficherDistanceCollecte() {
 
 function preparerCollecte() {
 
-   
+       // Réinitialisation au démarrage de la collecte
+    distanceCollecte = 0;
+    dernierPointCollecte = null;
+    traceParcourue = [];
+    afficherDistanceCollecte();
 
     if (groupeWaypoints) {
         
@@ -230,6 +236,11 @@ if (suiviGPS) {
 
             longitudeGPS =
                 position.coords.longitude;
+            horodatagePositionGPS =
+    position.timestamp || Date.now();
+
+precisionPositionGPS =
+    position.coords.accuracy;
 
             altitudeGPS =
                 position.coords.altitude;
