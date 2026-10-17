@@ -1305,42 +1305,44 @@ donnees.push([
 ]);
 
 donnees.push([
-    "En agglomération : " +
-    (stats.distanceAgglo / 1000).toFixed(2) +
-    " km (" +
-    stats.pourcentageAgglo.toFixed(1) +
-    " %)",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "Hors agglomération : " +
-    (stats.distanceHorsAgglo / 1000).toFixed(2) +
-    " km (" +
-    stats.pourcentageHorsAgglo.toFixed(1) +
-    " %)"
+  "En agglomération : " +
+  (stats.distanceAgglo / 1000).toFixed(2) +
+  " km (" +
+  stats.pourcentageAgglo.toFixed(1) +
+  " %)",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "",
+  "Revêtu : " +
+  (stats.distanceRevetu / 1000).toFixed(2) +
+  " km (" +
+  stats.pourcentageRevetu.toFixed(1) +
+  " %)",
 ]);
 
+
 donnees.push([
-    "Revêtu : " +
-    (stats.distanceRevetu / 1000).toFixed(2) +
-    " km (" +
-    stats.pourcentageRevetu.toFixed(1) +
-    " %)",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "Non revêtu : " +
-    (stats.distanceNonRevetu / 1000).toFixed(2) +
-    " km (" +
-    stats.pourcentageNonRevetu.toFixed(1) +
-    " %)"
+ "Hors agglomération : " +
+ (stats.distanceHorsAgglo / 1000).toFixed(2) +
+ " km (" +
+ stats.pourcentageHorsAgglo.toFixed(1) +
+ " %)"
+ "",
+ "",
+ "",
+ "",
+ "",
+ "",
+ "Non revêtu : " +
+ (stats.distanceNonRevetu / 1000).toFixed(2) +
+ " km (" +
+ stats.pourcentageNonRevetu.toFixed(1) +
+ " %)"
 ]);
+
 
 donnees.push([]);
 
