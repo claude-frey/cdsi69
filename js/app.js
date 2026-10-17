@@ -1329,7 +1329,7 @@ donnees.push([
  (stats.distanceHorsAgglo / 1000).toFixed(2) +
  " km (" +
  stats.pourcentageHorsAgglo.toFixed(1) +
- " %)"
+ " %)",
  "",
  "",
  "",
