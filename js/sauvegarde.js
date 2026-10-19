@@ -64,6 +64,77 @@
 
 let collecteModifiee = false;
 
+// ======================================================
+// Sauvegarde automatique toutes les 30 secondes
+// ======================================================
+
+let intervalleSauvegardeAutomatique = null;
+
+function effectuerSauvegardeAutomatique() {
+
+    if (collecteEnCoursPourEcran !== true) {
+        return;
+    }
+
+    try {
+
+        sauvegarderCollecte();
+
+    } catch (erreur) {
+
+        console.error(
+            "CDSI69 : échec de la sauvegarde automatique.",
+            erreur
+        );
+
+    }
+
+}
+
+function demarrerSauvegardeAutomatique() {
+
+    // Éviter de créer plusieurs minuteries
+    arreterSauvegardeAutomatique();
+
+    // Première sauvegarde immédiate
+    effectuerSauvegardeAutomatique();
+
+    // Puis sauvegarde toutes les 30 secondes
+    intervalleSauvegardeAutomatique = setInterval(
+        effectuerSauvegardeAutomatique,
+        30000
+    );
+
+}
+
+function arreterSauvegardeAutomatique() {
+
+    if (intervalleSauvegardeAutomatique !== null) {
+
+        clearInterval(
+            intervalleSauvegardeAutomatique
+        );
+
+        intervalleSauvegardeAutomatique = null;
+
+    }
+
+}
+
+// Sauvegarde supplémentaire si l'application passe en arrière-plan
+document.addEventListener("visibilitychange", function() {
+
+    if (
+        document.visibilityState === "hidden" &&
+        collecteEnCoursPourEcran === true
+    ) {
+
+        effectuerSauvegardeAutomatique();
+
+    }
+
+});
+
 function sauvegarderCollecte() {
 
    const collecte = {
@@ -368,9 +439,11 @@ function reprendreCollecte() {
 restaurerCollecte(collecte);
 
 collecteActive = collecte;
+
 collecteEnCoursPourEcran = true;
 
 activerVerrouEcran();
+demarrerSauvegardeAutomatique();
 
 testerGPS();
 }
@@ -395,6 +468,7 @@ restaurerCollecte(collecteActive);
 
 collecteEnCoursPourEcran = true;
 activerVerrouEcran();
+demarrerSauvegardeAutomatique();
 
 testerGPS();
 }

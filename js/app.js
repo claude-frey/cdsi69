@@ -1,5 +1,4 @@
-/*ChatGPT
-    CDSI69
+/*    CDSI69
     Version : 2.15- octobre 2026
     Fichier : package.json
 
@@ -531,6 +530,9 @@ if (tdbCircuit) {
 // Préparation d'une nouvelle collecte
 preparerCollecte();
 
+// Démarrage de la sauvegarde automatique
+demarrerSauvegardeAutomatique();
+
     // Redessin de la carte
     setTimeout(function () {
 
@@ -1000,6 +1002,7 @@ setTimeout(function() {
 }, 1000);
 
 collecteActive = false;
+arreterSauvegardeAutomatique();
 collecteEnCoursPourEcran = false;
 await libererVerrouEcran();
 
