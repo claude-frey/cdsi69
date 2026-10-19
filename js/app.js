@@ -1,6 +1,6 @@
 /*ChatGPT
     CDSI69
-    Version : 2.14 - août 2026
+    Version : 2.15- octobre 2026
     Fichier : package.json
 
     Auteurs :
@@ -96,6 +96,9 @@ const informationsCollecte = {
 
 };
 let collecteActive = null;
+let verrouEcran = null;
+let collecteEnCoursPourEcran = false;
+
 const COLONNES_EXCEL = [
     "WP",
     "Balisage",
@@ -114,7 +117,97 @@ const COLONNES_EXCEL = [
 let photoEnCours = null;
 let referencePhotoEnCours = "";
 
+
 modeGPX.addEventListener('change',majInterface);
+// =============================================
+// Maintien de l'écran éveillé pendant la collecte
+// =============================================
+
+async function activerVerrouEcran() {
+
+    if (!("wakeLock" in navigator)) {
+        console.warn(
+            "Le maintien de l'écran éveillé n'est pas pris en charge."
+        );
+        return;
+    }
+
+    if (document.visibilityState !== "visible") {
+        return;
+    }
+
+    if (verrouEcran && !verrouEcran.released) {
+        return;
+    }
+
+    try {
+
+        const nouveauVerrou =
+            await navigator.wakeLock.request("screen");
+
+        verrouEcran = nouveauVerrou;
+
+        nouveauVerrou.addEventListener("release", function() {
+
+            if (verrouEcran === nouveauVerrou) {
+                verrouEcran = null;
+            }
+
+        });
+
+    } catch (erreur) {
+
+        verrouEcran = null;
+
+        console.warn(
+            "Impossible de maintenir l'écran éveillé :",
+            erreur
+        );
+
+    }
+}
+
+
+// Libérer le verrou à la fin de la collecte
+async function libererVerrouEcran() {
+
+    const verrou = verrouEcran;
+
+    verrouEcran = null;
+
+    if (!verrou) {
+        return;
+    }
+
+    try {
+
+        await verrou.release();
+
+    } catch (erreur) {
+
+        console.warn(
+            "Impossible de libérer le verrou d'écran :",
+            erreur
+        );
+
+    }
+}
+
+
+// Réactiver le verrou lorsque l'application revient au premier plan
+document.addEventListener("visibilitychange", function() {
+
+    if (
+        document.visibilityState === "visible" &&
+        collecteEnCoursPourEcran === true
+    ) {
+
+        activerVerrouEcran();
+
+    }
+
+});
+
 modeSansGPX.addEventListener('change',majInterface);
 if (nomTrace) {
     nomTrace.addEventListener('input', majInterface);
@@ -388,7 +481,9 @@ function demarrerCollecte() {
     }
 
     collecteActive = true;
-    
+collecteEnCoursPourEcran = true;
+
+    activerVerrouEcran();
 
 
     // Changement d'écran
@@ -781,8 +876,6 @@ function ouvrirFenetreInitialisation() {
 
     }
 
-    document.getElementById("vitesseMoyenne").value = 3.5;
-
     document
         .getElementById("fenetreInitialisation")
         .classList.remove("cache");
@@ -906,7 +999,9 @@ setTimeout(function() {
 
 }, 1000);
 
-
+collecteActive = false;
+collecteEnCoursPourEcran = false;
+await libererVerrouEcran();
 
     nettoyerCollecteInterrompue();
 
@@ -1251,6 +1346,7 @@ donnees.push([
     "📊 SYNTHÈSE DE LA COLLECTE"
 ]);
 
+/* On remettra ce bloc pour affichage du dénivelé quand ça fonctionnera correctement.
 donnees.push([
     "Nombre de waypoints : " +
     collecte.waypoints.length,
@@ -1265,6 +1361,18 @@ donnees.push([
     " m / -" +
     stats.deniveleNegatif.toFixed(0) +
     " m"
+]);
+*/
+
+donnees.push([
+    "Nombre de waypoints : " +
+    collecte.waypoints.length,
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
 ]);
 
 const distanceKm = stats.distanceTotale / 1000;

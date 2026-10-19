@@ -96,42 +96,54 @@ function mettreAJourPositionGPS(latitude, longitude) {
 
 function mettreAJourTraceCollecte(latitude, longitude, altitude) {
 
+    // Ne rien enregistrer si aucune collecte n'est en cours
+    if (!traceMarcheur) return;
+
     const pointActuel = L.latLng(latitude, longitude);
 
+    // Premier point de la trace
     if (dernierPointCollecte === null) {
 
         dernierPointCollecte = pointActuel;
-        return;
 
-    }
+        traceParcourue.push({
+            latitude: latitude,
+            longitude: longitude,
+            altitude: altitude
+        });
 
-    const distance = dernierPointCollecte.distanceTo(pointActuel);
-
-    if (distance >= DISTANCE_MINI) {
-
-        distanceCollecte += distance;
-
-        dernierPointCollecte = pointActuel;
+        traceMarcheur.setLatLngs([
+            [latitude, longitude]
+        ]);
 
         afficherDistanceCollecte();
 
+        return;
     }
 
+    // Distance depuis le dernier point retenu
+    const distance =
+        dernierPointCollecte.distanceTo(pointActuel);
 
-    
+    // Ignorer les petits déplacements dus aux imprécisions GPS
+    if (distance < DISTANCE_MINI) return;
 
-    if (!traceMarcheur) return;
+    // Mettre à jour le compteur
+    distanceCollecte += distance;
+    dernierPointCollecte = pointActuel;
 
-   traceParcourue.push({
-    latitude: latitude,
-    longitude: longitude,
-    altitude: altitude
-});
+    // Enregistrer exactement le même point dans la trace
+    traceParcourue.push({
+        latitude: latitude,
+        longitude: longitude,
+        altitude: altitude
+    });
 
-    const points = traceParcourue.map(p => [
-        p.latitude,
-        p.longitude
-    ]);
+    afficherDistanceCollecte();
+
+    const points = traceParcourue.map(function(p) {
+        return [p.latitude, p.longitude];
+    });
 
     traceMarcheur.setLatLngs(points);
 }
@@ -345,14 +357,6 @@ mettreAJourTraceCollecte(
     longitudeGPS,
     altitudeGPS
 );
-
-mettreAJourDistanceCollecte(
-    latitudeGPS,
-    longitudeGPS
-);
-
-
-
 
         },
 

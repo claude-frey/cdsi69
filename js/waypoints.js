@@ -1,6 +1,6 @@
 /*
     CDSI69
-    Version : 2.14 - août 2026
+    Version : 2.15- octobre 2026
     Fichier : package.json
 
     Auteurs :
@@ -217,11 +217,6 @@ let pkCalcule = Math.round(getDistanceCollecte());
             - pkPrecedent
         );
 
-}
-
-const champPK = document.getElementById("pk");
-if (champPK) {
-    champPK.value = Math.round(pkCalcule);
 }
 
 const champEntrePas = document.getElementById("entrePas");
@@ -1004,14 +999,25 @@ waypointCourant.signaletique =
 
 
 
-   if (
-    document.getElementById("pk").value !== ""
-) {
+// Lire le PK dans son élément d'affichage
+const elementPK = document.getElementById("pk");
 
-    waypointCourant.pk =
-        document.getElementById("pk").value;
+const textePK = elementPK
+    ? elementPK.textContent.trim()
+    : "";
+
+if (textePK !== "") {
+
+    const pkEnregistre = Number(textePK);
+
+    if (Number.isFinite(pkEnregistre)) {
+        waypointCourant.pk = Math.round(pkEnregistre);
+    }
 
 }
+
+// "Entre deux" sera recalculé plus bas
+// à partir des PK dans l'ordre des waypoints.
 
 waypointCourant.entrePas =
     document.getElementById("entrePas").value;

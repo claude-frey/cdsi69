@@ -1,3 +1,63 @@
+/*ChatGPT
+    CDSI69
+    Version : 2.15- octobre 2026
+    Fichier : package.json
+
+    Auteurs :
+        Claude Frey
+        &
+        OpenAI ChatGPT
+
+    
+    Architecture :
+        aide.html 
+        index.html
+        manifest.json
+        package.json
+        package-lock.json
+        service-worker.js
+        test-gps.html
+        Version.txt
+        vite.config.js
+            |
+            |__js
+                +__app.js
+                +__carte.js
+                +__debug.js
+                +__dictee.js
+                +__export.js
+                +__export_GPX.js
+                +__gps.js
+                +__gpx.js
+                +__jszip.min.js
+                +__leaflet.js
+                +__leaflet-omnivore.js
+                +__photos.js
+                +__sauvegarde.js
+                +__waypoints.js
+                +__xlsx.bundle.js
+                +__xlsx.full.min.js
+            |__css
+                +leaflet.css
+                +__style.js
+            |__dist
+                |__assets
+                |__images
+                |__js
+                +__index.html
+            |__Documents
+                +__CDSI69_Carnet_d_architecture_v1
+            |__icones
+                +__icon-50.png
+                +__icon-125.png
+                +__icon-192.png
+                +__icon-512.png
+            |__images
+            |__node_modules
+            |__public
+                |__images
+                |__js 
+*/
 // ======================================================
 // Sauvegarde automatique de la collecte
 // ======================================================
@@ -14,6 +74,8 @@ function sauvegarderCollecte() {
 
     //nomCollecte,
     nomCollecte: document.getElementById("tdbCircuit").textContent,
+
+    informationsCollecte: { ...informationsCollecte },
 
     numeroWP,
 
@@ -98,6 +160,26 @@ function restaurerCollecte(collecte) {
 
 
     nomCollecte = collecte.nomCollecte;
+
+    if (
+    collecte.informationsCollecte &&
+    typeof collecte.informationsCollecte === "object"
+) {
+    Object.assign(
+        informationsCollecte,
+        collecte.informationsCollecte
+    );
+
+    const champVitesse = document.getElementById("vitesseMoyenne");
+
+    if (
+        champVitesse &&
+        Number.isFinite(Number(informationsCollecte.vitesse)) &&
+        Number(informationsCollecte.vitesse) > 0
+    ) {
+        champVitesse.value = Number(informationsCollecte.vitesse);
+    }
+}
 
     // ===== Restauration des variables =====
 
@@ -264,7 +346,10 @@ function reprendreCollecte() {
 
     let collecte;
 
-    if (collecteActive) {
+   if (
+    collecteActive &&
+    typeof collecteActive === "object"
+) {
 
         collecte = collecteActive;
 
@@ -280,9 +365,14 @@ function reprendreCollecte() {
         collecte = JSON.parse(texte);
     }
 
-    restaurerCollecte(collecte);
+restaurerCollecte(collecte);
 
-    testerGPS();
+collecteActive = collecte;
+collecteEnCoursPourEcran = true;
+
+activerVerrouEcran();
+
+testerGPS();
 }
 
 function reprendreCollecteDepuisFichier() {
@@ -301,9 +391,12 @@ function reprendreCollecteDepuisFichier() {
         }).addTo(carte);
     }
 
-    restaurerCollecte(collecteActive);
+restaurerCollecte(collecteActive);
 
-    testerGPS();
+collecteEnCoursPourEcran = true;
+activerVerrouEcran();
+
+testerGPS();
 }
    
 
