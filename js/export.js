@@ -1,4 +1,5 @@
-/*    CDSI69
+/*ChatGPT
+    CDSI69
     Version : 2.15- octobre 2026
     Fichier : package.json
 
@@ -181,6 +182,30 @@ function telechargerCollecte(collecte, pourZIP = false) {
 
 }
 
+// ======================================================
+// Construction du nom de fichier d'une photo
+// ======================================================
+
+function construireNomFichierPhoto(photo, extension) {
+
+    const reference = String(photo.reference || "Photo")
+        .replace(/[<>:"/\\|?*\u0000-\u001F]/g, "_");
+
+    const commentaireCourt = String(photo.commentaire || "")
+        .replace(/[<>:"/\\|?*\u0000-\u001F]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 150)
+        .trim()
+        .replace(/[. ]+$/g, "");
+
+    if (commentaireCourt === "") {
+        return reference + extension;
+    }
+
+    return reference + "_" + commentaireCourt + extension;
+}
+
 function exporterPhotos(collecte) {
 
     const zip = new JSZip();
@@ -220,13 +245,9 @@ function exporterPhotos(collecte) {
                 );
 
             const nomFichier =
-                photo.reference + extension;
+    construireNomFichierPhoto(photo, extension);
 
-            const descriptif =
-                photo.commentaire &&
-                photo.commentaire.trim() !== ""
-                    ? photo.commentaire
-                    : "Photo sans descriptif";
+           
 
             // -----------------------------------------
             // Photo encore disponible directement
@@ -239,10 +260,7 @@ function exporterPhotos(collecte) {
                     photo.fichier
                 );
 
-                zip.file(
-                    photo.reference + ".txt",
-                    descriptif
-                );
+               
 
                 continue;
             }
@@ -270,10 +288,7 @@ function exporterPhotos(collecte) {
                         photoBDD.fichier
                     );
 
-                    zip.file(
-                        photo.reference + ".txt",
-                        descriptif
-                    );
+                   
 
                 });
 
@@ -433,13 +448,9 @@ async function exporterCollecteZIP(collecte) {
                     );
 
                 const nomFichier =
-                    photo.reference + extension;
+    construireNomFichierPhoto(photo, extension);
 
-                const descriptif =
-                    photo.commentaire &&
-                    photo.commentaire.trim() !== ""
-                        ? photo.commentaire
-                        : "Photo sans descriptif";
+                
 
                 // -------------------------------------
                 // Photo encore disponible
@@ -452,10 +463,7 @@ async function exporterCollecteZIP(collecte) {
                         photo.fichier
                     );
 
-                    dossierPhotos.file(
-                        photo.reference + ".txt",
-                        descriptif
-                    );
+                    
 
                     continue;
                 }
@@ -485,10 +493,7 @@ async function exporterCollecteZIP(collecte) {
                             photoBDD.fichier
                         );
 
-                        dossierPhotos.file(
-                            photo.reference + ".txt",
-                            descriptif
-                        );
+                       
 
                     });
 
