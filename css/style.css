@@ -1202,6 +1202,13 @@ input[type=text] {
 #btnValiderCommentairePhoto,
 #btnAnnulerCommentairePhoto,
 #btnEnregistrerCommentairePhoto {
+    #btnEnregistrerCommentairePhoto {
+    width: 90%;
+    padding: 10px;
+    margin: 10px auto;
+    display: block;
+    font-size: 1.1em;
+}
 
     width: 30%;
 
