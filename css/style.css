@@ -1200,7 +1200,8 @@ input[type=text] {
 
 #btnDicteePhoto,
 #btnValiderCommentairePhoto,
-#btnAnnulerCommentairePhoto {
+#btnAnnulerCommentairePhoto,
+#btnEnregistrerCommentairePhoto {
 
     width: 30%;
 
