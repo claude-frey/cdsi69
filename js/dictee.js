@@ -441,3 +441,11 @@ document
 
         }
     );
+    document
+    .getElementById("btnDicteeCommentairePhoto")
+    .addEventListener(
+        "click",
+        function() {
+            dicterTexte("commentairePhoto");
+        }
+    );

@@ -116,7 +116,7 @@
 
 
     <p>
-    Cette application a pour vocation de vous aider à collecter un nouvel itinéraire, que ce soit en suivant une trace GPX qui a été déterminée
+    Cette application a pour ambition de vous aider à collecter un nouvel itinéraire, que ce soit en suivant une trace GPX qui a été déterminée
      (et chargée sur le téléphone) au préalable ou qui sera créée au fur et à mesure de votre progression.<br>
     Elle vous permettra également de reprendre une collecte interrompue (volontairement ou non).<br>
     Vous obtiendrez, à la fin de la collecte, un fichier .ZIP contenant plusieurs fichiers :<br> 
@@ -302,39 +302,28 @@ Vous pouvez ajouter une ou plusieurs photos au waypoint.
 Chaque photo peut être accompagnée d'un descriptif permettant de préciser
 ce qu'elle représente ou la raison pour laquelle elle a été prise. Elle est
 systématiquement liée au waypoint auquel elle appartient.
-Les photos peuvent ensuite être consultées ou modifiées depuis
-la fiche de ce waypoint.
 </p>
 
 <p>
 Lors de l'archivage final de la collecte, les photos sont enregistrées dans
-le dossier <strong>Photos</strong> du fichier ZIP. Chaque photo est accompagnée
-de son descriptif (texte de description et numéro du waypoint auquel elle est associée et son numéro dans la liste des photos de ce waypoint.).
+le dossier <strong>Photos</strong> du fichier ZIP. Le nom de chaque photo comprend le numéro du waypoint, 
+le numéro de la photo dans la liste des photo de ce waypoint et le texte descriptif
+de cette photo. Ce texte des description est limité à 150 caractères en plus du numéro 
+de waypoint et du numéro de la photo dans la liste.
 </p>
 
 
 <h2 id="dictee"><u>5. Utiliser la dictée vocale</u></h2>
 
 <p>
-Lorsque le bouton <strong>🎤 Dicter</strong> est présent à côté d'un champ,
-touchez ce bouton puis parlez clairement.
+Pour faciliter la saisie de textes sur le terrain, notamment par temps froid ou humide lorsque les doigts sont trop engourdis
+pour taper aisement sur le clavier, la totalité des champs peut être renseignée à l'aide de la dictée vocale, 
+hormis le nom des collecteurs, pour des raisons d'orthographe des noms propres, comme expliqué ci-dessous.
 </p>
 
 <p>
-Pendant l'écoute, le bouton indique que la reconnaissance vocale est en
-cours. Lorsque la dictée est terminée, le texte reconnu est inscrit dans le champ correspondant. Suivant le modèle de téléphone et son système de reconnaissance vocale 
-le texte retranscrit peut présenter des surprises, notamment les noms propres, les noms de lieux ou les termes particuliers. Relisez le. 
-</p>
-
-<p>
-Pour faciliter la saisie de textes sur le terrain, notamment par temps froid ou humide lorsque les doigts sont engourdis
-pour taper sur le clavier, la totalité des champs peut être renseignée à l'aide de la dictée vocale, 
-hormis le nom des collecteurs pour des raisons d'orthographe des noms propres comme expliqué ci-dessus.
-</p>
-
-<p>
-Une boite de dialogue permet, en cas de rectification d'un champ déjà renseigné, de poursuivre l'écriture sans avoir 
-besoin de tout resaisir.
+Une boite de dialogue permet, en cas de rectification d'un champ déjà renseigné, soit de resaisir la totalité
+de l'écriture, soit de continuer l'écriture du champs sans avoir besoin de tout resaisir.
 </p>
 
 <p>
@@ -343,11 +332,27 @@ utilisé. (Firefox sur Android, par exemple, ne permet pas la saisie vocale).
 Si elle n'est pas disponible, le texte peut toujours être saisi au clavier.
 </p>
 
+<p>
+Lorsque le bouton <strong>🎤 Dicter</strong> est présent à côté d'un champ,
+touchez ce bouton puis parlez clairement.
+</p>
+
+<p>
+Pendant l'écoute, le bouton indique que la reconnaissance vocale est en
+cours. Lorsque la dictée est terminée, le texte reconnu est inscrit dans le champ correspondant. 
+Suivant le modèle de téléphone et son système de reconnaissance vocale 
+le texte retranscrit peut présenter des surprises, notamment les noms propres, 
+les noms de lieux ou les termes particuliers. Relisez le. 
+</p>
+
+
+
 <h2 id="reprendre"><u>6. Interrompre et reprendre une collecte</u></h2>
 
 <p>
-Une collecte peut être interrompue volontairement, par exemple à la fin
-d'une journée, puis reprise ultérieurement.
+Une collecte peut être interrompue soit volontairement, par exemple à la fin
+d'une journée, soit accidentellement par panne de batterie par exemple. 
+Dans les deux cas la collecte pourra être reprise ultérieurement.
 </p>
 
 <p>
@@ -367,7 +372,7 @@ la trace, les waypoints et les renseignements associés.
 Vous pouvez ensuite poursuivre normalement votre travail.
 </p>
 <p>
-Cas particulier d'une collecte interrompue accidentellement (panne de batterie, par exemple) :
+Si la collecte est interrompue accidentellement (panne de batterie, par exemple) :
 L'application effectue en permanence une sauvegarde des données. Donc si la collecte s'arrête sans 
 avoir été menée jusqu'à la fin du processus normal, lors de la réouverture de l'application, CDSI69 vous proposera automatiquement
 de reprendre cette collecte là où l'enregistrement s'est arrêté. <br>Vous pourrez alors soit continuer immédiatement, soit plus tard ou 
