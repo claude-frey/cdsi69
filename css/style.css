@@ -1202,30 +1202,23 @@ input[type=text] {
 #btnValiderCommentairePhoto,
 #btnAnnulerCommentairePhoto,
 #btnEnregistrerCommentairePhoto {
-    #btnEnregistrerCommentairePhoto {
+    width: 30%;
+    padding: 8px 3px;
+    margin: 4px 1%;
+    font-size: 0.95em;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px !important;
+    cursor: pointer;
+}
+
+#btnEnregistrerCommentairePhoto {
     width: 90%;
     padding: 10px;
     margin: 10px auto;
     display: block;
     font-size: 1.1em;
 }
-
-    width: 30%;
-
-    padding: 8px 3px;
-
-    margin: 4px 1%;
-
-    font-size: 0.95em;
-
-    font-weight: bold;
-       border: none;
-
-  border-radius: 12px !important;
-
-    cursor: pointer;
-
-} 
 
 /* ========================================= */
 /* Initialisation de la collecte             */
