@@ -1,41 +1,43 @@
 // CDSI69 - Service Worker
 // Version 1.0
 
-const CACHE_NAME = "cdsi69-v2-3";
+const CACHE_NAME = "cdsi69-v2-4";
+const CACHE_CARTES_NAME = "cdsi69-cartes-v1";
 
 const FICHIERS_A_METTRE_EN_CACHE = [
 
-    "/",
-    "/index.html",
-    "/aide.html",
-    "/manifest.json",
+    "./",
+    "./index.html",
+    "./aide.html",
+    "./manifest.json",
 
     // CSS
-    "/css/style.css",
-    "/css/leaflet.css",
+    "./css/style.css",
+    "./css/leaflet.css",
 
     // JavaScript CDSI69
-    "/js/app.js",
-    "/js/carte.js",
-    "/js/debug.js",
-    "/js/dictee.js",
-    "/js/export_GPX.js",
-    "/js/export.js",
-    "/js/gps.js",
-    "/js/gpx.js",
-    "/js/jszip.min.js",
-    "/js/leaflet.js",
-    "/js/leaflet-omnivore.min.js",
-    "/js/photos.js",
-    "/js/sauvegarde.js",
-    "/js/waypoints.js",
-    "/js/xlsx.bundle.js",
-    "/js/xlsx.full.min.js",
+    "./js/app.js",
+    "./js/carte.js",
+    "./js/debug.js",
+    "./js/dictee.js",
+    "./js/export_GPX.js",
+    "./js/export.js",
+    "./js/gps.js",
+    "./js/gpx.js",
+    "./js/jszip.min.js",
+    "./js/leaflet.js",
+    "./js/leaflet-omnivore.min.js",
+    "./js/photos.js",
+    "./js/sauvegarde.js",
+    "./js/waypoints.js",
+    "./js/xlsx.bundle.js",
+    "./js/xlsx.full.min.js",
 
     // Icônes
-    "/icones/icon-192.png",
-    "/icones/icon-512.png"
-    ];
+    "./icones/icon-192.png",
+    "./icones/icon-512.png"
+
+];
 
 
 // -------------------------------------------------
@@ -67,16 +69,27 @@ self.addEventListener("install", function(event) {
 // ACTIVATION
 // -------------------------------------------------
 
+// -------------------------------------------------
+// ACTIVATION
+// -------------------------------------------------
+
 self.addEventListener("activate", function(event) {
 
     event.waitUntil(
-         caches.keys().then(function(nomsCaches) {
+
+        caches.keys().then(function(nomsCaches) {
 
             return Promise.all(
 
                 nomsCaches.map(function(nomCache) {
 
-                    if (nomCache !== CACHE_NAME) {
+                    // Supprimer uniquement les anciennes
+                    // versions du cache principal CDSI69
+
+                    if (
+                        nomCache.startsWith("cdsi69-v2-") &&
+                        nomCache !== CACHE_NAME
+                    ) {
 
                         return caches.delete(nomCache);
 
@@ -86,12 +99,16 @@ self.addEventListener("activate", function(event) {
 
             );
 
+        }).then(function() {
+
+            // Prendre immédiatement le contrôle
+            // des pages ouvertes
+
+            return self.clients.claim();
+
         })
 
     );
-
-    // Prend immédiatement le contrôle des pages
-    self.clients.claim();
 
 });
 
@@ -156,7 +173,7 @@ self.addEventListener("fetch", function(event) {
                         ) {
 
                             return caches.match(
-                                "/index.html"
+                                "./index.html"
                             );
 
                         }
